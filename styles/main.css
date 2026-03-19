@@ -1,0 +1,1773 @@
+/* ============================================================
+   HOCHZEITSWEBSITE DIANA & JULIAN – main.css
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   0. FLUGZEUG ANIMATION
+   ------------------------------------------------------------ */
+
+/* Overlay – fixed über der gesamten Seite, kein Klick-Block */
+.flug-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* Wrapper, der quer über die Seite fliegt */
+.flug-plane-wrapper {
+  position: absolute;
+  top: 18vh;
+  left: -380px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  opacity: 0;
+}
+
+/* Weißes SVG-Flugzeug */
+.flug-plane-svg {
+  width: 400px;
+  height: auto;
+  filter:
+    drop-shadow(0 0 8px rgba(255,255,255,0.4))
+    drop-shadow(0 6px 18px rgba(28,32,58,0.22));
+  display: block;
+  transform: none;
+}
+
+/* Flug von links nach rechts */
+@keyframes flugzeug-flug {
+  0%   { transform: translateX(0);                      opacity: 1; }
+  88%  { transform: translateX(calc(100vw + 420px));    opacity: 1; }
+  100% { transform: translateX(calc(100vw + 420px));    opacity: 0; }
+}
+
+.flug-plane-wrapper.flying {
+  opacity: 1;
+  animation: flugzeug-flug 16s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* ---- Herz-Wolke: ein Cluster aus mehreren kleinen Herzen ---- */
+.flug-herzwolke {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  width: 60px;
+  height: 60px;
+  /* Position wird per JS gesetzt */
+}
+
+/* Einzelne Herzchen innerhalb der Wolke */
+.flug-herzwolke span {
+  position: absolute;
+  color: #fff;
+  user-select: none;
+  text-shadow:
+    0 1px 6px rgba(167,214,247,0.7),
+    0 0 3px rgba(255,255,255,0.6);
+  line-height: 1;
+}
+
+/* Pufft als Wolken-Gruppe auf und steigt auf */
+@keyframes herzwolke-auf {
+  0%   { transform: translateY(0)    scale(0.5); opacity: 0;   }
+  15%  { transform: translateY(-12px) scale(1.0); opacity: 1;   }
+  60%  { transform: translateY(-55px) scale(1.1); opacity: 0.75; }
+  100% { transform: translateY(-105px) scale(0.85); opacity: 0; }
+}
+
+.flug-herzwolke.aufsteigen {
+  animation: herzwolke-auf 2.6s ease-out forwards;
+}
+
+@keyframes hero-herz-auf {
+  0%   { transform: translate(-50%, -50%)  scale(0.6); opacity: 0;   }
+  8%   { transform: translate(-50%, -60%)  scale(1.1); opacity: 1;   }
+  50%  { transform: translate(-50%, -140%) scale(1.0); opacity: 1;   }
+  80%  { transform: translate(-50%, -210%) scale(0.95); opacity: 0.7; }
+  100% { transform: translate(-50%, -270%) scale(0.85); opacity: 0;   }
+}
+
+@media (max-width: 600px) {
+  .flug-plane-svg {
+    width: 240px;
+  }
+
+  .flug-plane-wrapper {
+    top: 22vh;
+    left: -280px;
+  }
+}
+
+/* ------------------------------------------------------------
+   1. RESET & BASE
+   ------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Lato', Arial, sans-serif;
+  background: #fff;
+}
+
+section {
+  padding: 0;
+  max-width: none;
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ------------------------------------------------------------
+   2. SCHRIFTEN / UTILITIES
+   ------------------------------------------------------------ */
+.lobster-regular {
+  font-family: 'Lobster', cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* ------------------------------------------------------------
+   3. NAVIGATION
+   ------------------------------------------------------------ */
+.navigation {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  z-index: 100;
+}
+
+.navigation ul {
+  list-style: none;
+  margin: 0;
+  padding: 1em 0;
+  display: flex;
+  justify-content: center;
+  max-width: 1200px;
+  width: 90vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.navigation li {
+  margin: 0 2em;
+}
+
+.navigation a {
+  text-decoration: none;
+  color: #1c203a;
+  font-family: 'Lato', Arial, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  transition: color 0.2s;
+}
+
+.navigation a.active,
+.navigation a:hover {
+  color: #a7d6f7;
+}
+
+/* Sprachumschalter */
+.language-switcher {
+  position: absolute;
+  top: 1em;
+  left: 2em;
+  z-index: 110;
+}
+
+.language-switcher button {
+  background: #1c203a;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  font-family: 'Lato', Arial, sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  padding: 0.5em 1.2em;
+  margin-right: 0.5em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  outline: none;
+}
+
+.language-switcher button:last-child {
+  margin-right: 0;
+}
+
+.language-switcher button:hover,
+.language-switcher button:focus {
+  background: #7fc6f7;
+  color: #0a0d1a;
+}
+
+/* Burger-Menü */
+.burger {
+  display: none;
+  width: 44px;
+  height: 44px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: fixed;
+  top: 1em;
+  right: 2em;
+  z-index: 99999;
+  background: rgba(167, 214, 247, 0.25);
+  backdrop-filter: blur(3px);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  transition: background 0.2s;
+}
+
+.burger:hover {
+  background: rgba(167, 214, 247, 0.45);
+}
+
+.burger span {
+  display: block;
+  width: 28px;
+  height: 4px;
+  margin: 4px 0;
+  background: #1c203a;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+.burger.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.burger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.burger .burger-x {
+  display: none;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 9999;
+  pointer-events: auto;
+  background: transparent;
+}
+
+.burger.active .burger-x {
+  display: block;
+}
+
+.burger.active span {
+  opacity: 0;
+}
+
+@media (max-width: 1000px) {
+  .navigation ul:not(#nav-list) {
+    display: none !important;
+  }
+
+  .burger {
+    display: flex !important;
+    right: 2em;
+    left: auto;
+    top: 1em;
+    position: fixed;
+  }
+
+  #nav-list {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 75vw;
+    height: 100vh;
+    background: rgba(167, 214, 247, 0.25);
+    backdrop-filter: blur(3px);
+    box-shadow: -2px 0 16px rgba(0,0,0,0.13);
+    padding-top: 5em;
+    z-index: 99998;
+    align-items: flex-start;
+    gap: 0.7em;
+    font-size: 1.5em;
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+    transform: translateX(100%);
+    visibility: hidden;
+  }
+
+  #nav-list.active {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  .navigation ul li {
+    width: 100%;
+    text-align: left;
+    margin-left: 2em;
+    margin-bottom: 0.3em;
+  }
+}
+
+@media (max-width: 600px) {
+  .burger {
+    right: 1em;
+    top: 0.7em;
+  }
+
+  #nav-list {
+    width: 95vw;
+    font-size: 1.2em;
+    padding-top: 5em;
+  }
+}
+
+/* ------------------------------------------------------------
+   4. HERO
+   ------------------------------------------------------------ */
+.hero {
+  font-family: 'Raleway', Arial, sans-serif;
+  position: relative;
+  width: 100vw;
+  min-height: 75vw;
+  max-width: 100vw;
+  overflow: hidden;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100%;
+  background-color: transparent;
+  background-image: url('../assets/PHOTO-2026-03-18-23-07-55.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+.hero-text {
+  position: absolute;
+  z-index: 2;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-headline {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.15em 0.5em;
+}
+
+.hero-title {
+  color: #1c203a !important;
+  font-size: clamp(1.4em, 4.5vw, 3.5em) !important;
+  font-weight: 900 !important;
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+}
+
+.hero-title-2 {
+  color: #1c203a !important;
+  font-size: clamp(0.7em, 2.2vw, 1.4em) !important;
+  margin-top: 0.5em !important;
+  width: 100%;
+}
+
+.hero-dots {
+  border-top-color: #1c203a !important;
+}
+
+.hero-subtitle-text {
+  white-space: nowrap;
+}
+
+.mobile-br {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .mobile-br {
+    display: block;
+  }
+}
+
+@media (min-width: 901px) {
+  .hero {
+    min-height: 100vw;
+    height: 100vw;
+    max-height: 100vw;
+    aspect-ratio: unset;
+  }
+
+  .hero-bg {
+    background-image: url('../assets/PHOTO-2026-03-18-23-07-55.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    min-height: 100vw;
+    height: 100vw;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .hero-bg {
+    background-image: url('../assets/hero_image_mobil.png');
+    background-size: cover;
+    background-position: center 20%;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: 120vw;
+    height: 120vw;
+    max-height: 120vw;
+  }
+
+  .hero-bg {
+    min-height: 120vw;
+    height: 120vw;
+    max-height: 120vw;
+    background-image: url('../assets/hero_image_mobil.png');
+    background-size: cover;
+    background-position: center top;
+  }
+
+  .hero-text {
+    top: 65%;
+  }
+
+  .hero-title {
+    font-size: clamp(2em, 11vw, 3.2em) !important;
+    white-space: nowrap;
+  }
+
+  .hero-title-2 {
+    font-size: clamp(0.75em, 4.2vw, 1.1em) !important;
+    margin-top: 0.1em !important;
+  }
+
+  .hero-subtitle-text {
+    white-space: nowrap;
+  }
+
+  .hero-dots {
+    display: none !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero,
+  .hero-bg {
+    min-height: 360px;
+    height: 360px;
+    max-height: 360px;
+    background-image: url('../assets/hero_image_mobil_2.png');
+    background-size: 100% auto;
+    background-position: center top;
+    background-repeat: no-repeat;
+  }
+
+  .hero-text {
+    top: 65%;
+  }
+  .hero-title {
+    font-size: clamp(1.2em, 7vw, 2em) !important;
+  }
+
+  .hero-title-2 {
+    font-size: clamp(0.55em, 3vw, 0.85em) !important;
+    margin-top: 0.1em !important;
+  }
+
+  .hero-dots {
+    display: none !important;
+  }
+}
+
+@media (min-width: 381px) and (max-width: 400px) {
+  .hero-text {
+    top: 55%;
+  }
+}
+
+@media (min-width: 401px) and (max-width: 600px) {
+  .hero-text {
+    top: 65%;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1000px) {
+  .hero-text {
+    top: 65%;
+  }
+}
+
+@media (min-width: 1001px) and (max-width: 1400px) {
+  .hero-text {
+    top: 65%;
+  }
+}
+
+@media (min-width: 1401px) {
+  .hero-text {
+    top: 65%;
+  }
+}
+
+/* Hero: Punkte-Zeile soll so breit sein wie der Titel */
+.hero-headline.geschichte-headline-strich,
+.headline-inline.geschichte-headline-strich {
+  width: auto;
+  max-width: none;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ------------------------------------------------------------
+   5. GEMEINSAME HEADLINE-ELEMENTE
+   ------------------------------------------------------------ */
+.geschichte-headline-strich {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 700px;
+}
+
+.geschichte-headline-tight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 700px;
+}
+
+.geschichte-title {
+  font-size: clamp(3.5em, 9vw, 7em);
+  font-weight: 400;
+  color: #a7d6f7;
+  letter-spacing: 0.05em;
+  display: block;
+  font-family: 'Lato', Arial, sans-serif;
+  line-height: 1;
+  margin-bottom: 0;
+}
+
+.geschichte-title-2 {
+  color: #fff;
+  font-family: 'Lobster', cursive;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 2.2em;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  line-height: 1;
+  margin-top: -0.2em;
+}
+
+.geschichte-headline-tight .geschichte-title {
+  margin-right: -0.08em;
+  margin-bottom: 0;
+}
+
+.geschichte-headline-tight .geschichte-title-2 {
+  margin: 0 -0.08em;
+}
+
+/* Gepunktete Linie links und rechts vom Schreibschrift-Text */
+.geschichte-dots-inline {
+  display: inline-block;
+  vertical-align: middle;
+  flex: 1;
+  height: 0;
+  border-top: 3px dotted #fff;
+  margin: 0 0.4em;
+  min-width: 40px;
+}
+
+/* Dunkel-Variante für helle Sections */
+.details-headline-color {
+  color: #1c203a !important;
+}
+
+.geschichte-dots-dark {
+  border-top-color: #1c203a !important;
+}
+
+.zusagen-headline-color {
+  color: #1c203a !important;
+}
+
+.anfahrt-headline-color {
+  color: #1c203a !important;
+}
+
+.geschenke-headline-color {
+  color: #fff !important;
+}
+
+.geschenke-subtitle-color {
+  color: #a7d6f7 !important;
+}
+
+/* Geschenke-Headline: Dots so breit wie GESCHENKE */
+.geschenke-headline-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  max-width: none;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .geschichte-headline-tight .geschichte-title {
+    font-size: clamp(4em, 8vw, 6em);
+    margin-right: -0.05em;
+    margin-bottom: 0;
+  }
+
+  .geschichte-headline-tight .geschichte-title-2 {
+    font-size: 2em;
+    margin: 0 -0.05em;
+  }
+
+  .geschichte-dots-inline {
+    min-width: 30px;
+    border-top-width: 2.5px;
+    margin: 0 0.2em;
+  }
+}
+
+@media (max-width: 600px) {
+  .geschichte-title {
+    font-size: 10px;
+    display: block;
+    line-height: 1.1;
+    margin: 0.3em 0 0.1em 0;
+    letter-spacing: 0;
+    word-break: normal;
+    white-space: nowrap;
+  }
+
+  .geschichte-title-2 {
+    font-size: 10px;
+    display: block;
+    margin: 0.1em 0;
+    white-space: nowrap;
+  }
+
+  .geschichte-dots-inline {
+    width: 28px;
+    border-top-width: 2px;
+    margin: 0 0.3em;
+  }
+}
+
+@media (max-width: 400px) {
+  .geschichte-title {
+    font-size: 10px;
+    letter-spacing: 0;
+  }
+
+  .geschichte-title-2 {
+    font-size: 10px;
+  }
+
+  .geschichte-dots-inline {
+    width: 20px;
+    border-top-width: 2px;
+    margin: 0 0.2em;
+  }
+}
+
+/* ------------------------------------------------------------
+   6. GESCHICHTE SECTION
+   ------------------------------------------------------------ */
+.geschichte-section {
+  background: #1c203a;
+  min-height: unset;
+  width: 100vw;
+  padding: 0 0 4em 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.geschichte-header {
+  margin-top: 0;
+  padding-top: 6em;
+  margin-bottom: 3.5em;
+  text-align: center;
+  align-self: center;
+}
+
+.geschichte-content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2em;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.geschichte-polaroid {
+  width: 380px;
+  max-width: 90vw;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  margin-bottom: 2em;
+  display: block;
+  transform: rotate(-3deg);
+}
+
+.geschichte-polaroid-2 {
+  transform: rotate(3deg) !important;
+  margin-top: -6em;
+  z-index: 0;
+  position: relative;
+}
+
+.geschichte-polaroid-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  margin-top: 3em;
+}
+
+.geschichte-polaroid-stack .geschichte-polaroid {
+  margin-bottom: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.geschichte-block {
+  max-width: 350px;
+  text-align: left;
+  align-self: center;
+  flex: 1;
+}
+
+.geschichte-block-title {
+  color: #fff;
+  font-family: 'Lobster', cursive;
+  font-size: 2em;
+  margin-bottom: 0.3em;
+  letter-spacing: 0.01em;
+}
+
+.geschichte-block-text {
+  color: #fff;
+  font-family: 'Lato', Arial, sans-serif;
+  font-size: 1em;
+  line-height: 1.6;
+  font-weight: 400;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  text-align: left;
+}
+
+@media (max-width: 900px) {
+  .geschichte-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .geschichte-polaroid {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 70vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .geschichte-section {
+    padding-top: 0;
+    padding-bottom: 4em;
+    min-height: unset;
+  }
+
+  .geschichte-header {
+    padding-top: 4.5em;
+    margin-top: 0;
+    margin-bottom: 0.1em;
+  }
+
+  .geschichte-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8em;
+  }
+
+  .geschichte-polaroid {
+    box-shadow: none;
+    margin-top: 0.1em;
+    margin-bottom: 0;
+    width: 90vw;
+    max-width: 320px;
+    transform: rotate(-3deg);
+  }
+
+  .geschichte-polaroid-stack {
+    margin-top: 1em;
+  }
+
+  .geschichte-polaroid-2 {
+    margin-top: -5em !important;
+  }
+
+  .geschichte-block {
+    margin-top: 0;
+    padding-top: 0;
+    padding-left: 1.4em;
+    padding-right: 1.4em;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .geschichte-block-text {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-top: 0.5em;
+  }
+}
+
+/* ------------------------------------------------------------
+   7. DETAILS SECTION
+   ------------------------------------------------------------ */
+.details-section {
+  background: #fff;
+  min-height: 100vh;
+  width: 100vw;
+  padding: 0 0 5em 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.details-header {
+  padding-top: 2.5em;
+  margin-bottom: 3.5em;
+  padding-bottom: 0;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.details-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.details-info {
+  background: #a7d6f7;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  padding: 2em 2.5em;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.details-icon-img {
+  max-width: 80px;
+  max-height: 80px;
+  margin: 1em 0 0.5em 0;
+  display: block;
+}
+
+.details-block-title {
+  color: #1c203a;
+  font-family: 'Lobster', cursive;
+  font-size: 2em;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+}
+
+.details-block-text {
+  font-family: 'Lato', Arial, sans-serif;
+  font-size: 1em;
+  color: #1c203a;
+  margin-bottom: 1em;
+}
+
+.details-map {
+  max-width: 420px;
+  width: 420px;
+  margin: 8em auto 0 auto;
+  padding-bottom: 10em;
+}
+
+.details-map iframe {
+  width: 100%;
+  display: block;
+}
+
+@media (min-width: 900px) {
+  .details-content {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5em;
+    padding-left: 0;
+    padding-right: 4%;
+  }
+
+  .details-info {
+    margin: 0;
+  }
+
+  .details-map {
+    margin: 0;
+    max-width: 260px;
+    width: 26vw;
+  }
+
+  .details-block-title {
+    font-size: 1.1em;
+  }
+}
+
+@media (max-width: 600px) {
+  .details-section {
+    padding-top: 2em;
+    padding-bottom: 0;
+    min-height: unset;
+  }
+
+  .details-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+  }
+
+  .details-info {
+    padding: 1em 0.5em;
+    max-width: 400px;
+    width: 90vw;
+    margin: 0 auto;
+  }
+
+  .details-map {
+    max-width: 400px;
+    width: 90vw;
+    margin: 0 auto;
+  }
+
+  .details-map iframe {
+    width: 100%;
+    max-width: 100%;
+    height: 200px;
+    min-height: 140px;
+  }
+}
+
+/* ------------------------------------------------------------
+   8. ANFAHRT SECTION
+   ------------------------------------------------------------ */
+.anfahrt-section {
+  position: relative;
+  min-height: 100vh;
+  width: 100vw;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #a7d6f7;
+  margin-top: -4.2em;
+  padding-top: 2em;
+  padding-bottom: 5em;
+}
+
+.anfahrt-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('../assets/moods/Bildschirmfoto 2026-02-14 um 18.59.12.png') center center/cover no-repeat;
+  z-index: 1;
+}
+
+.anfahrt-content {
+  position: relative;
+  z-index: 2;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.anfahrt-header {
+  padding-top: 2.5em;
+  margin-bottom: 3.5em;
+  padding-bottom: 0;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.anfahrt-boxes {
+  display: flex;
+  gap: 2em;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.anfahrt-box {
+  background: #1c203a;
+  color: #fff;
+  border-radius: 12px;
+  padding: 2em;
+  max-width: 320px;
+  width: 90vw;
+  min-width: 220px;
+  margin-bottom: 2em;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.anfahrt-icon-img {
+  display: block;
+  margin: 1em auto 0.5em auto;
+  max-width: 70px;
+  max-height: 70px;
+}
+
+@media (min-width: 601px) {
+  .anfahrt-icon-img {
+    max-width: 45px;
+    max-height: 45px;
+  }
+}
+
+.anfahrt-box-title {
+  color: #fff;
+  font-family: 'Lobster', cursive;
+  font-size: 1.3em;
+  margin-bottom: 0.5em;
+}
+
+.anfahrt-box-text {
+  font-family: 'Lato', Arial, sans-serif;
+  font-size: 1em;
+  color: #fff;
+}
+
+.fluglinie-herz-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.fluglinie-herz {
+  display: block;
+  margin: 3em auto 0 auto;
+  max-width: 900px;
+  width: 100%;
+  height: auto;
+  box-shadow: none;
+  filter: none;
+}
+
+@media (min-width: 601px) {
+  .fluglinie-herz {
+    max-width: 680px;
+  }
+}
+
+@media (max-width: 900px) {
+  .anfahrt-boxes {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .anfahrt-section {
+    margin-top: -4.2em;
+    padding-top: 2em;
+    padding-bottom: 6em;
+    min-height: unset;
+  }
+
+  .fluglinie-herz {
+    margin: 1.5em auto 0 auto;
+    max-width: 90vw;
+    width: 90vw;
+  }
+}
+
+/* ------------------------------------------------------------
+   9. GESCHENKE SECTION
+   ------------------------------------------------------------ */
+.geschenke-section {
+  background: #1c203a;
+  min-height: 100vh;
+  width: 100vw;
+  padding: 0 0 2em 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.geschenke-header {
+  padding-top: 2.5em;
+  margin-top: 0;
+  margin-bottom: 3.5em;
+  padding-bottom: 0;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.geschenke-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+}
+
+.geschenke-polaroid {
+  width: 520px;
+  max-width: 90vw;
+  border-radius: 0;
+  margin-top: 0;
+  margin-bottom: 2em;
+  margin-right: -4em;
+  display: block;
+  transform: rotate(-7deg);
+  box-shadow: none;
+}
+
+.geschenke-link-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.geschenke-block-text {
+  padding-left: 1.2em;
+  padding-right: 1.2em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.geschenke-link {
+  font-family: 'Lato', Arial, sans-serif;
+  color: #a7d6f7;
+  text-align: left;
+  max-width: 350px;
+  font-size: 1.2em;
+  line-height: 1.4;
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+  padding-left: 1.2em;
+  padding-right: 1.2em;
+  text-decoration: underline;
+}
+
+@media (min-width: 601px) {
+  .geschenke-link {
+    margin-top: 1em;
+    white-space: nowrap;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .geschenke-header {
+    padding-top: 2.5em;
+  }
+}
+
+@media (max-width: 900px) {
+  .geschenke-header {
+    padding-top: 5em;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .geschenke-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8em;
+  }
+
+  .geschenke-section {
+    min-height: auto;
+    padding-bottom: 3em;
+  }
+
+  .geschenke-header {
+    padding-top: 2.5em;
+    margin-top: 0;
+    margin-bottom: 0.1em;
+  }
+
+  .geschenke-polaroid {
+    box-shadow: none;
+    margin-top: 0.1em;
+    margin-bottom: 0;
+    width: 95vw;
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    transform: rotate(-4deg);
+  }
+
+  #geschenke .geschichte-block {
+    margin-top: 0;
+    padding-top: 0;
+    padding-left: 1.4em;
+    padding-right: 1.4em;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .geschenke-link {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 1.1em;
+  }
+}
+
+/* ------------------------------------------------------------
+   10. ZUSAGEN SECTION
+   ------------------------------------------------------------ */
+.zusagen-section {
+  position: relative;
+  min-height: 100vh;
+  width: 100vw;
+  padding: 0 0 2em 0;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.5em;
+  background: #fff;
+}
+
+.zusagen-header {
+  padding-top: 6em;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 3.5em;
+  display: flex;
+  justify-content: center;
+}
+
+.zusagen-bordkarte-wrapper {
+  margin-top: 2em;
+}
+
+.bordkarte-stack {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 700px;
+}
+
+.bordkarte-img {
+  max-width: 650px;
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+  margin-bottom: 2em;
+  display: block;
+  box-shadow: -6px 0 14px rgba(28, 32, 58, 0.10);
+}
+
+.bordkarte-front {
+  margin-left: auto;
+  margin-right: auto;
+  transform: rotate(-3deg);
+  position: relative;
+  z-index: 2;
+}
+
+.bordkarte-back {
+  max-width: 600px;
+  position: absolute;
+  top: 0;
+  left: 20px;
+  transform: rotate(8deg);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.zusagen-header-gap {
+  height: 1.5em;
+}
+
+.zusagen-form-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.zusagen-form {
+  background: #1c203a;
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  padding: 2em 1em;
+  max-width: 350px;
+  margin: 0 auto;
+  width: 90vw;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Lato', Arial, sans-serif;
+  gap: 0.7em;
+}
+
+.zusagen-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  margin-bottom: 1.2em;
+  align-items: flex-start;
+}
+
+.zusagen-radio-group label {
+  font-size: 1em;
+  color: #fff;
+  font-family: 'Lato', Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.zusagen-radio-group input[type="radio"] {
+  accent-color: #1c203a;
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.zusagen-form input,
+.zusagen-form textarea {
+  background: #fff;
+  color: #1c203a;
+  border: 1px solid #a7d6f7;
+  border-radius: 8px;
+  padding: 0.7em;
+  font-size: 1em;
+  font-family: 'Lato', Arial, sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.zusagen-form input::placeholder,
+.zusagen-form textarea::placeholder {
+  color: #1c203a;
+  opacity: 1;
+  font-family: 'Lato', Arial, sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+}
+
+.zusagen-form textarea {
+  min-height: 80px;
+  resize: vertical;
+  font-family: 'Lato', Arial, sans-serif;
+}
+
+.zusagen-form button {
+  background: #a7d6f7;
+  color: #1c203a;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8em 2em;
+  font-size: 1.1em;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 0.5em;
+  transition: background 0.2s, color 0.2s;
+}
+
+.zusagen-form button:hover,
+.zusagen-form button:focus {
+  background: #7fc6f7;
+  color: #0a0d1a;
+}
+
+/* Text unter dem Formular */
+.zusagen-footer-text {
+  display: block;
+  text-align: center;
+  font-size: 1.4em;
+  color: #1c203a;
+  margin-top: 3em;
+  margin-bottom: 0.5em;
+  letter-spacing: 0.03em;
+  padding: 0 1em;
+}
+
+@media (min-width: 601px) {
+  .zusagen-footer-text br {
+    display: none;
+  }
+}
+
+/* Toast-Benachrichtigung nach Formular-Absenden */
+.zusagen-toast {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  background: #1c203a;
+  color: #fff;
+  border: 2px solid #a7d6f7;
+  border-radius: 14px;
+  padding: 0.9em 1.6em;
+  font-family: 'Lato', Arial, sans-serif;
+  font-size: 1.05em;
+  font-weight: 600;
+  box-shadow: 0 6px 24px rgba(28,32,58,0.18);
+  margin-top: 1.2em;
+  opacity: 0;
+  transform: translateY(16px) scale(0.95);
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  max-width: 340px;
+  text-align: center;
+}
+
+.zusagen-toast.sichtbar {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.zusagen-toast-icon {
+  font-size: 1.5em;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.toast-flugzeug-svg {
+  width: 2.2em;
+  height: auto;
+  filter: drop-shadow(0 0 4px rgba(255,255,255,0.7));
+}
+
+@media (min-width: 900px) {
+  .bordkarte-img {
+    max-width: 900px;
+  }
+}
+
+@media (max-width: 600px) {
+  .zusagen-header {
+    padding-top: 1.5em;
+    text-align: center;
+    width: 100vw;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .zusagen-header-gap {
+    height: 1em;
+  }
+
+  .zusagen-bordkarte-wrapper {
+    margin-top: 8em;
+  }
+
+  .bordkarte-img {
+    max-width: 320px;
+    margin-bottom: 1.2em;
+  }
+
+  .bordkarte-front {
+    transform: rotate(-7deg);
+  }
+}
+
+/* ------------------------------------------------------------
+   11. FOOTER
+   ------------------------------------------------------------ */
+.footer {
+  width: 100vw;
+  max-width: 100vw;
+  overflow-x: hidden;
+  background: #a7d6f7;
+  color: #1c203a;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: 200px;
+  margin-top: 0;
+  position: relative;
+  padding-top: 0;
+}
+
+.footer-image {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  height: 100%;
+}
+
+.footer-image img {
+  max-height: 110px;
+  width: auto;
+  max-width: 340px;
+  object-fit: contain;
+  display: block;
+  position: absolute;
+  bottom: -8px;
+  right: 1.5em;
+  margin: 0;
+}
+
+.footer-text-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-top: 0;
+}
+
+/* Footer-Text Breakpoints */
+@media (max-width: 400px) {
+  .footer-text-group { top: 38%; }
+}
+@media (min-width: 401px) and (max-width: 600px) {
+  .footer-text-group { top: 40%; }
+}
+@media (min-width: 601px) and (max-width: 1000px) {
+  .footer-text-group { top: 42%; }
+}
+@media (min-width: 1001px) {
+  .footer-text-group { top: 45%; }
+}
+
+.footer-namen {
+  display: block;
+  font-family: 'Lobster', cursive;
+  font-size: 1.8em;
+  color: #1c203a;
+  text-align: center;
+  text-shadow: none;
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+}
+
+.footer-headline {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-title {
+  color: #1c203a !important;
+  font-size: clamp(1.4em, 3.5vw, 2.8em) !important;
+  font-family: 'Lato', Arial, sans-serif !important;
+  font-weight: 900 !important;
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+}
+
+.footer-title-2 {
+  color: #1c203a !important;
+  font-size: clamp(0.85em, 2vw, 1.4em) !important;
+  margin-top: 0.4em !important;
+  width: 100%;
+}
+
+.footer-dots {
+  border-top-color: #1c203a !important;
+}
+
+.footer-datum-text {
+  white-space: nowrap;
+}
+
+.footer-heart {
+  font-size: 0.85em;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.footer-datum {
+  display: block;
+  font-family: 'Lato', Arial, sans-serif;
+  font-size: 0.95em;
+  color: #1c203a;
+  text-align: center;
+  letter-spacing: 0.08em;
+  margin-top: 0.1em;
+  opacity: 0.75;
+  width: 100%;
+}
+
+.footer-image img {
+  max-height: 110px;
+  width: auto;
+  max-width: 340px;
+  object-fit: contain;
+  display: block;
+  position: absolute;
+  bottom: -8px;
+  right: 1.5em;
+  margin: 0;
+}
+
+@media (min-width: 601px) {
+  .footer-image img {
+    max-height: 230px;
+    max-width: 620px;
+  }
+
+  .footer-title {
+    font-size: clamp(1.8em, 4vw, 3.5em) !important;
+  }
+
+  .footer-title-2 {
+    font-size: clamp(1em, 2.2vw, 1.8em) !important;
+  }
+
+  .footer {
+    height: 260px;
+    padding-top: 0;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* Titel verkleinern */
+  .geschichte-title {
+    font-size: 10px;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
+  .geschichte-title-2 {
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  /* Dots größer */
+  .geschichte-dots-inline {
+    width: 28px;
+    border-top-width: 2px;
+    margin: 0 0.3em;
+  }
+
+  /* Einheitlicher Abstand zwischen Headline und Sektionsinhalt */
+  .details-content,
+  .anfahrt-boxes,
+  .geschichte-content,
+  .geschenke-content,
+  .zusagen-bordkarte-wrapper,
+  .zusagen-form-wrapper {
+    margin-top: 2rem;
+  }
+
+  /* Details: Abstand zwischen details-info und Map */
+  .details-map {
+    margin-top: 2rem;
+  }
+
+}
+
+@media (max-width: 600px) {
+  .footer-title {
+    font-size: clamp(1.6em, 7vw, 2.5em) !important;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .footer-title-2 {
+    font-size: clamp(1em, 4.5vw, 1.4em) !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    width: 100% !important;
+  }
+
+  .footer-headline {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+  }
+}

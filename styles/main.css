@@ -371,6 +371,23 @@ img {
     padding: 1em 0 0.2em 0;
     background: transparent;
   }
+  .language-switcher-mobile button {
+    background: #a7d6f7;
+    color: #1c203a;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Lato', Arial, sans-serif;
+    font-size: 0.85em;
+    font-weight: 700;
+    padding: 0.45em 1em;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .language-switcher-mobile button:hover,
+  .language-switcher-mobile button:focus {
+    background: #7fc6f7;
+    color: #0a0d1a;
+  }
 }
 
 @media (max-width: 600px) {
@@ -1294,6 +1311,8 @@ img {
   padding-right: 1.2em;
   margin-top: 0;
   margin-bottom: 0;
+  max-width: 420px;
+  box-sizing: border-box;
 }
 
 .geschenke-link {

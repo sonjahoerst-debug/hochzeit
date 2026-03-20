@@ -185,7 +185,7 @@ img {
 /* Sprachumschalter */
 .language-switcher {
   position: absolute;
-  top: 1em;
+  top: 0.4em;
   left: 2em;
   z-index: 110;
 }
@@ -1743,6 +1743,7 @@ img {
   font-size: clamp(0.85em, 2vw, 1.4em) !important;
   margin-top: 0.4em !important;
   width: 100%;
+  justify-content: center !important;
 }
 
 .footer-dots {

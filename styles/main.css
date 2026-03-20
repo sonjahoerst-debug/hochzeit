@@ -941,7 +941,7 @@ img {
     flex-direction: column;
     align-items: center;
     gap: 0.8em;
-    margin-top: 0.5em;
+    margin-top: 0;
   }
 
   .geschichte-polaroid {
@@ -1849,7 +1849,6 @@ img {
   /* Einheitlicher Abstand zwischen Headline und Sektionsinhalt */
   .details-content,
   .anfahrt-boxes,
-  .geschichte-content,
   .geschenke-content,
   .zusagen-bordkarte-wrapper,
   .zusagen-form-wrapper {

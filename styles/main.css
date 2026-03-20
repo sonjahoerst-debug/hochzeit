@@ -932,15 +932,16 @@ img {
   }
 
   .geschichte-header {
-    padding-top: 1.2em;
+    padding-top: 2em;
     margin-top: 0;
-    margin-bottom: 0.1em;
+    margin-bottom: 0.5em;
   }
 
   .geschichte-content {
     flex-direction: column;
     align-items: center;
     gap: 0.8em;
+    margin-top: 0.5em;
   }
 
   .geschichte-polaroid {
@@ -1086,10 +1087,15 @@ img {
     min-height: unset;
   }
 
+  .details-header {
+    margin-bottom: 0.8em;
+  }
+
   .details-content {
     flex-direction: column;
     align-items: center;
     gap: 1em;
+    margin-top: 0.5em;
   }
 
   .details-info {
@@ -1246,6 +1252,14 @@ img {
     min-height: unset;
   }
 
+  .anfahrt-header {
+    margin-bottom: 0.8em;
+  }
+
+  .anfahrt-boxes {
+    margin-top: 0.5em;
+  }
+
   .fluglinie-herz {
     margin: 1.5em auto 0 auto;
     max-width: 90vw;
@@ -1370,10 +1384,10 @@ img {
 
   .geschenke-polaroid {
     box-shadow: none;
-    margin-top: 0.1em;
+    margin-top: -0.5em;
     margin-bottom: 0;
-    width: 95vw;
-    max-width: 460px;
+    width: 98vw;
+    max-width: 500px;
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -1630,7 +1644,7 @@ img {
 
 @media (max-width: 600px) {
   .zusagen-header {
-    padding-top: 1.5em;
+    padding-top: 3.5em;
     text-align: center;
     width: 100vw;
     margin-bottom: 0;

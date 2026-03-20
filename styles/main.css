@@ -632,11 +632,10 @@ img {
 /* Hero: Punkte-Zeile soll so breit sein wie der Titel */
 .hero-headline.geschichte-headline-strich,
 .headline-inline.geschichte-headline-strich {
-  width: auto;
-  max-width: min(90vw, 600px);
   display: inline-flex;
   flex-direction: column;
   align-items: stretch;
+  max-width: 90vw;
 }
 
 /* ------------------------------------------------------------
@@ -646,18 +645,18 @@ img {
   display: inline-flex;
   flex-direction: column;
   align-items: stretch;
-  max-width: min(90vw, 420px);
+  max-width: 90vw;
 }
 
 .geschichte-headline-tight {
   display: inline-flex;
   flex-direction: column;
   align-items: stretch;
-  max-width: min(90vw, 420px);
+  max-width: 90vw;
 }
 
 .geschichte-title {
-  font-size: min(9vw, 3.4rem);
+  font-size: clamp(2rem, 9vw, 7em);
   font-weight: 400;
   color: #a7d6f7;
   letter-spacing: 0.05em;
@@ -666,6 +665,9 @@ img {
   line-height: 1;
   margin-bottom: 0;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  max-width: 90vw;
 }
 
 .geschichte-title-2 {
@@ -673,7 +675,7 @@ img {
   font-family: 'Lobster', cursive;
   font-weight: 400;
   text-transform: none;
-  font-size: min(5.5vw, 2.1rem);
+  font-size: clamp(1.2rem, 5.5vw, 3rem);
   margin: 0;
   display: flex;
   align-items: center;
@@ -685,12 +687,12 @@ img {
 }
 
 .geschichte-headline-tight .geschichte-title {
-  margin-right: -0.08em;
+  margin-right: 0;
   margin-bottom: 0;
 }
 
 .geschichte-headline-tight .geschichte-title-2 {
-  margin: 0 -0.08em;
+  margin: 0;
 }
 
 /* Gepunktete Linie links und rechts vom Schreibschrift-Text */

@@ -633,34 +633,31 @@ img {
 .hero-headline.geschichte-headline-strich,
 .headline-inline.geschichte-headline-strich {
   width: auto;
-  max-width: none;
+  max-width: min(90vw, 600px);
   display: inline-flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
 }
 
 /* ------------------------------------------------------------
    5. GEMEINSAME HEADLINE-ELEMENTE
    ------------------------------------------------------------ */
 .geschichte-headline-strich {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 700px;
+  align-items: stretch;
+  max-width: min(90vw, 420px);
 }
 
 .geschichte-headline-tight {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  align-items: center;
-  width: 90vw;
-  max-width: 700px;
-  overflow: hidden;
+  align-items: stretch;
+  max-width: min(90vw, 420px);
 }
 
 .geschichte-title {
-  font-size: clamp(1.8rem, 8vw, 5rem);
+  font-size: min(9vw, 3.4rem);
   font-weight: 400;
   color: #a7d6f7;
   letter-spacing: 0.05em;
@@ -676,11 +673,11 @@ img {
   font-family: 'Lobster', cursive;
   font-weight: 400;
   text-transform: none;
-  font-size: clamp(1.1rem, 5vw, 3rem);
+  font-size: min(5.5vw, 2.1rem);
   margin: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
   position: relative;
   line-height: 1;
@@ -703,8 +700,8 @@ img {
   flex: 1;
   height: 0;
   border-top: 3px dotted #fff;
-  margin: 0 0.4em;
-  min-width: 40px;
+  margin: 0 0.35em;
+  min-width: 12px;
 }
 
 /* Dunkel-Variante für helle Sections */
@@ -744,18 +741,18 @@ img {
 
 @media (max-width: 900px) {
   .geschichte-headline-tight .geschichte-title {
-    margin-right: -0.05em;
+    margin-right: 0;
     margin-bottom: 0;
   }
 
   .geschichte-headline-tight .geschichte-title-2 {
-    margin: 0 -0.05em;
+    margin: 0;
   }
 
   .geschichte-dots-inline {
-    min-width: 30px;
-    border-top-width: 2.5px;
-    margin: 0 0.2em;
+    min-width: 10px;
+    border-top-width: 2px;
+    margin: 0 0.25em;
   }
 }
 
@@ -770,9 +767,9 @@ img {
   }
 
   .geschichte-dots-inline {
-    width: 28px;
+    min-width: 8px;
     border-top-width: 2px;
-    margin: 0 0.3em;
+    margin: 0 0.2em;
   }
 }
 
@@ -798,7 +795,7 @@ img {
   }
 
   .geschichte-dots-inline {
-    width: 16px;
+    min-width: 6px;
     border-top-width: 2px;
     margin: 0 0.15em;
   }
@@ -1811,9 +1808,8 @@ img {
 
   /* Dots Abstand */
   .geschichte-dots-inline {
-    width: 28px;
     border-top-width: 2px;
-    margin: 0 0.3em;
+    margin: 0 0.2em;
   }
 
   /* Einheitlicher Abstand zwischen Headline und Sektionsinhalt */

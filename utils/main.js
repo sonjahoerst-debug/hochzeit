@@ -252,10 +252,10 @@ document.addEventListener('DOMContentLoaded', function () {
         // Toast-Text und Icon je nach Auswahl
         if (isZusage) {
           toast.querySelector('.zusagen-toast-icon').innerHTML = '<svg viewBox="0 0 616.15 470.28" xmlns="http://www.w3.org/2000/svg" class="toast-flugzeug-svg"><path d="M317.76,261.37s-2.49-14.19-8.1-23.66c-5.6-9.46-36.12-50.27-36.12-50.27l-26.15-33.12s-16.19-18.04-22.42-20.7c-6.23-2.66,4.98-11.53,16.19-5.32,11.21,6.21,90.29,81.61,90.29,81.61l9.96.59s2.18-6.8,11.83-13.6c9.65-6.8,21.17-.3,24.29,5.91s4.98,15.08-3.42,19.81-18.99,3.84-18.99,3.84l10.59,15.38,29.27-8.87s10.59-5.03,29.89-8.87c19.3-3.84,26.78,5.91,26.78,5.91,0,0,8.1,14.49-18.68,29.57-26.78,15.08-47.32,22.47-47.32,22.47l-11.21,34.3s28.33-20.99,31.76,2.37c3.42,23.36-17.12,15.08-21.79,15.38-4.67.3-14.32,0-14.32,0,0,0-31.13,106.75-36.12,119.46-4.98,12.72-7.47,14.79-7.47,14.79,0,0-9.03,4.44-10.59-2.37s18.06-107.04,19.3-127.74c1.25-20.7-3.74-33.71-3.74-33.71l-47.95,20.11-32.38,13.6s-12.14,49.09-13.7,57.96c-1.56,8.87-8.1,8.28-8.1,8.28l-1.25-69.19s-23.97,5.62-37.36,7.69-26.78-1.18-26.78-1.18c0,0,4.98-9.17,21.79-13.6s36.74-11.24,36.74-11.24c0,0-28.96-47.02-33-55.59-4.05-8.58,3.74-7.39,9.34-2.37,5.6,5.03,39.23,43.76,44.21,45.54,4.98,1.77,74.72-43.17,74.72-43.17Z" fill="white"/></svg>';
-          toastText.textContent = 'Deine Sitzplätze sind gebucht!';
+          toastText.textContent = toastText.getAttribute('data-zusage') || 'Deine Sitzplätze sind gebucht!';
         } else {
           toast.querySelector('.zusagen-toast-icon').innerHTML = '♡';
-          toastText.textContent = 'Schade, dass du nicht dabei bist!';
+          toastText.textContent = toastText.getAttribute('data-absage') || 'Schade, dass du nicht dabei bist!';
         }
 
         // Herz-Explosion
@@ -340,7 +340,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (gTitle2) gTitle2.innerHTML = '<span class="geschichte-dots-inline"></span>Geschichte<span class="geschichte-dots-inline"></span>';
       // Geschichte – Text
       const gBlockText = document.querySelector('#geschichte .geschichte-block-text');
-      if (gBlockText) gBlockText.innerHTML = '<p>Nach einigen unerwarteten und wundersamen Wegen durch die Welt haben wir uns gefunden.</p><p>An einem sonnigen, wunderschönen Augusttag 2022 standen wir im Garten des Schlosses Koblenz und beobachteten die Hochzeit zweier Fremder, als uns eine etwas ungewöhnliche, aber herzliche Dame ihren kleinen „Segen" schenkte. Ihre Frage lautete: „Wann seid ihr so weit?" Heute können wir ihr endlich antworten: am 29.05.2026!</p><p>Die Tage, Wochen, Monate und schließlich auch ein paar Jahre vergingen – noch nicht viele, erst drei –, und doch spüren wir bei jeder Umarmung dieses unglaubliche Gefühl, etwas gefunden zu haben, das wir vielleicht für unmöglich hielten: einen Traum, einen Schatz.</p><p>Doch nicht nur dieses Gefühl lässt uns heute sicher sein, diesen Schritt zu gehen. Es ist die Unterstützung, der Respekt und die Toleranz, die uns auch in Momenten tragen, in denen wir nicht einer Meinung sind. Es ist die Bereitschaft, uns jeden Tag als Individuen weiterzuentwickeln, die uns zeigt, dass wir jetzt bereit sind.</p><p>Und natürlich hat auch dieses „Etwas", das uns erlaubt, einander so zu lieben, wie wir sind, viel mit den Menschen zu tun, die uns durch unser Leben begleiten. Mit euch möchten wir diesen besonderen Moment teilen, denn durch euch sind wir zu den Menschen geworden, die wir heute sind.</p>';
+      if (gBlockText) gBlockText.innerHTML = '<p>Nach einigen unerwarteten und wundersamen Wegen durch die Welt haben wir uns gefunden.</p><p>An einem sonnigen, wunderschönen Augusttag 2022 standen wir im Garten des Schlosses Koblenz und beobachteten die Hochzeit zweier Fremder, als uns eine etwas ungewöhnliche, aber herzliche Dame ihren kleinen „Segen" schenkte. Ihre Frage lautete: „Wann seid ihr so weit?" Heute können wir ihr endlich antworten: am <strong>29.05.2026</strong>!</p><p>Die Tage, Wochen, Monate und schließlich auch ein paar Jahre vergingen – noch nicht viele, erst drei –, und doch spüren wir bei jeder Umarmung dieses unglaubliche Gefühl, etwas gefunden zu haben, das wir vielleicht für unmöglich hielten: einen Traum, einen Schatz.</p><p>Doch nicht nur dieses Gefühl lässt uns heute sicher sein, diesen Schritt zu gehen. Es ist die Unterstützung, der Respekt und die Toleranz, die uns auch in Momenten tragen, in denen wir nicht einer Meinung sind. Es ist die Bereitschaft, uns jeden Tag als Individuen weiterzuentwickeln, die uns zeigt, dass wir jetzt bereit sind.</p><p>Und natürlich hat auch dieses „Etwas", das uns erlaubt, einander so zu lieben, wie wir sind, viel mit den Menschen zu tun, die uns durch unser Leben begleiten. Mit euch möchten wir diesen besonderen Moment teilen, denn durch euch sind wir zu den Menschen geworden, die wir heute sind.</p>';
 
       // Details – Überschrift
       const detailsTitle = document.querySelector('#details .geschichte-title');
@@ -352,7 +352,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (detailsTitles[0]) detailsTitles[0].textContent = 'Wann';
       if (detailsTitles[1]) detailsTitles[1].textContent = 'Wo';
       const detailsTexts = document.querySelectorAll('.details-block-text');
-      if (detailsTexts[0]) detailsTexts[0].innerHTML = 'Sonntag, 29. Mai 2026<br>Hochzeitszeremonie: 13:00 Uhr<br>Hochzeitsfeier: 19:00 Uhr';
+      if (detailsTexts[0]) detailsTexts[0].innerHTML = '<strong>Freitag, 29. Mai 2026</strong><br>Hochzeitszeremonie: 13:00 Uhr<br>Hochzeitsfeier: 19:00 Uhr';
       if (detailsTexts[1]) detailsTexts[1].innerHTML = 'Friedrichspark<br>Lindenstraße 507<br>10555 Berlin';
 
       // Anfahrt – Überschrift
@@ -403,6 +403,8 @@ document.addEventListener('DOMContentLoaded', function () {
       // Toast
       const toastTextEl = document.getElementById('zusagen-toast-text');
       if (toastTextEl) toastTextEl.textContent = 'Deine Sitzplätze sind gebucht!';
+      toastTextEl && toastTextEl.setAttribute('data-zusage', 'Deine Sitzplätze sind gebucht!');
+      toastTextEl && toastTextEl.setAttribute('data-absage', 'Schade, dass du nicht dabei bist!');
     }
 
     if (lang === 'es') {
@@ -426,7 +428,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (gTitle2) gTitle2.innerHTML = '<span class="geschichte-dots-inline"></span>Historia<span class="geschichte-dots-inline"></span>';
       // Geschichte – Text
       const gBlockText = document.querySelector('#geschichte .geschichte-block-text');
-      if (gBlockText) gBlockText.innerHTML = '<p>Después de dar algunas inimaginadas vueltas por el mundo, nos encontramos.</p><p>Un día de agosto, soleado, hermoso, ese día admirábamos una boda de extraños en el jardín del castillo de Koblenz cuando una extraña señora nos dio el flechazo, la bendición. Su pregunta: „y ustedes cuando se casan?" hoy podemos responderla: el 29.05.2026!</p><p>Pasaban los días, semanas, meses y algunos años, aún no tantos, solo llevamos 3 pero aún, cada vez al abrazarnos podemos sentir esa increíble sensación de haber encontrado algo que tal vez creíamos imposible, un sueño, un tesoro.</p><p>Y no es eso lo que hoy nos hace estar seguros de dar este paso, es el apoyo, el respeto, la tolerancia que mantenemos en los momentos en los que no estamos tan de acuerdo, la disposición de mejorarnos individualmente cada día lo que nos hace estar seguros de que ahora estamos preparados!</p><p>Y por su puesto eso que nos hace amarnos como somos, tiene que ver mucho con esas personas que han estado a nuestro alrededor desde que llegamos a este mundo y con quienes quisiéramos compartir este hermoso momento, ya que por ustedes somos quien somos hoy.</p>';
+      if (gBlockText) gBlockText.innerHTML = '<p>Después de dar algunas inimaginadas vueltas por el mundo, nos encontramos.</p><p>Un día de agosto, soleado, hermoso, ese día admirábamos una boda de extraños en el jardín del castillo de Koblenz cuando una extraña señora nos dio el flechazo, la bendición. Su pregunta: „y ustedes cuando se casan?" hoy podemos responderla: el <strong>29.05.2026</strong>!</p><p>Pasaban los días, semanas, meses y algunos años, aún no tantos, solo llevamos 3 pero aún, cada vez al abrazarnos podemos sentir esa increíble sensación de haber encontrado algo que tal vez creíamos imposible, un sueño, un tesoro.</p><p>Y no es eso lo que hoy nos hace estar seguros de dar este paso, es el apoyo, el respeto, la tolerancia que mantenemos en los momentos en los que no estamos tan de acuerdo, la disposición de mejorarnos individualmente cada día lo que nos hace estar seguros de que ahora estamos preparados!</p><p>Y por su puesto eso que nos hace amarnos como somos, tiene que ver mucho con esas personas que han estado a nuestro alrededor desde que llegamos a este mundo y con quienes quisiéramos compartir este hermoso momento, ya que por ustedes somos quien somos hoy.</p>';
 
       // Details – Überschrift
       const detailsTitle = document.querySelector('#details .geschichte-title');
@@ -438,7 +440,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (detailsTitles[0]) detailsTitles[0].textContent = 'Cuándo';
       if (detailsTitles[1]) detailsTitles[1].textContent = 'Dónde';
       const detailsTexts = document.querySelectorAll('.details-block-text');
-      if (detailsTexts[0]) detailsTexts[0].innerHTML = 'Domingo, 29 de mayo de 2026<br>Ceremonia: 13:00<br>Fiesta: 19:00';
+      if (detailsTexts[0]) detailsTexts[0].innerHTML = '<strong>Viernes, 29 de mayo de 2026</strong><br>Ceremonia: 13:00<br>Fiesta: 19:00';
       if (detailsTexts[1]) detailsTexts[1].innerHTML = 'Friedrichspark<br>Lindenstraße 507<br>10555 Berlín';
 
       // Anfahrt – Überschrift
@@ -489,6 +491,9 @@ document.addEventListener('DOMContentLoaded', function () {
       // Toast
       const toastTextEl = document.getElementById('zusagen-toast-text');
       if (toastTextEl) toastTextEl.textContent = '¡Tus asientos están reservados!';
+      // Toast-Texte für Spanisch merken
+      toastTextEl && toastTextEl.setAttribute('data-zusage', '¡Tus asientos están reservados!');
+      toastTextEl && toastTextEl.setAttribute('data-absage', '¡Qué pena que no puedas estar!');
     }
   }
 

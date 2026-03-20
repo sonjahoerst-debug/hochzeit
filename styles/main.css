@@ -635,7 +635,7 @@ img {
   display: inline-flex;
   flex-direction: column;
   align-items: stretch;
-  max-width: 90vw;
+  max-width: 92vw;
 }
 
 /* ------------------------------------------------------------
@@ -645,18 +645,18 @@ img {
   display: inline-flex;
   flex-direction: column;
   align-items: stretch;
-  max-width: 90vw;
+  max-width: 92vw;
 }
 
 .geschichte-headline-tight {
   display: inline-flex;
   flex-direction: column;
   align-items: stretch;
-  max-width: 90vw;
+  max-width: 92vw;
 }
 
 .geschichte-title {
-  font-size: clamp(2rem, 9vw, 7em);
+  font-size: clamp(2rem, 12vw, 7em);
   font-weight: 400;
   color: #a7d6f7;
   letter-spacing: 0.05em;
@@ -665,9 +665,7 @@ img {
   line-height: 1;
   margin-bottom: 0;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: clip;
-  max-width: 90vw;
+  max-width: 92vw;
 }
 
 .geschichte-title-2 {
@@ -1250,7 +1248,7 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .geschenke-header {

@@ -216,6 +216,18 @@ img {
   color: #0a0d1a;
 }
 
+@media (max-width: 1000px) {
+  .language-switcher {
+    display: none;
+  }
+  .language-switcher button {
+    font-size: 0.78em;
+    padding: 0.45em 0.85em;
+    border-radius: 10px;
+    margin-right: 0.3em;
+  }
+}
+
 /* Burger-Menü */
 .burger {
   display: none;
@@ -287,8 +299,8 @@ img {
 
   .burger {
     display: flex !important;
-    right: 2em;
-    left: auto;
+    right: auto;
+    left: 1.2em;
     top: 1em;
     position: fixed;
   }
@@ -329,8 +341,10 @@ img {
 
 @media (max-width: 600px) {
   .burger {
-    right: 1em;
-    top: 0.7em;
+    left: 1em;
+    right: auto;
+    top: 0.6em;
+    padding: 0.3em 0.45em;
   }
 
   #nav-list {
@@ -343,6 +357,48 @@ img {
 /* ------------------------------------------------------------
    4. HERO
    ------------------------------------------------------------ */
+
+/* Sprach-Buttons unter Hero – nur Mobile */
+.language-switcher-mobile {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .language-switcher-mobile {
+    display: flex;
+    justify-content: center;
+    gap: 0.6em;
+    padding: 1em 0 0.2em 0;
+    background: transparent;
+  }
+}
+
+@media (max-width: 600px) {
+  .language-switcher-mobile {
+    display: flex;
+    justify-content: center;
+    gap: 0.6em;
+    padding: 1em 0 0.2em 0;
+    background: transparent;
+  }
+  .language-switcher-mobile button {
+    background: #a7d6f7;
+    color: #1c203a;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Lato', Arial, sans-serif;
+    font-size: 0.85em;
+    font-weight: 700;
+    padding: 0.45em 1em;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .language-switcher-mobile button:hover,
+  .language-switcher-mobile button:focus {
+    background: #7fc6f7;
+    color: #0a0d1a;
+  }
+}
 .hero {
   font-family: 'Raleway', Arial, sans-serif;
   position: relative;
@@ -496,7 +552,7 @@ img {
     height: 360px;
     max-height: 360px;
     background-image: url('../assets/hero_image_mobil_2.png');
-    background-size: 100% auto;
+    background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
   }
@@ -515,6 +571,31 @@ img {
 
   .hero-dots {
     display: none !important;
+  }
+}
+
+@media (max-width: 300px) {
+  .hero,
+  .hero-bg {
+    min-height: 100vw;
+    height: 100vw;
+    max-height: 100vw;
+    background-size: cover;
+    background-position: center top;
+    overflow: hidden;
+  }
+  .hero-text {
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+  }
+  .hero-title {
+    font-size: clamp(1em, 8vw, 1.6em) !important;
+    white-space: nowrap;
+  }
+  .hero-title-2 {
+    font-size: clamp(0.45em, 3.5vw, 0.7em) !important;
+    white-space: nowrap;
   }
 }
 
@@ -573,12 +654,13 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 90vw;
   max-width: 700px;
+  overflow: hidden;
 }
 
 .geschichte-title {
-  font-size: clamp(3.5em, 9vw, 7em);
+  font-size: clamp(1.8rem, 8vw, 5rem);
   font-weight: 400;
   color: #a7d6f7;
   letter-spacing: 0.05em;
@@ -586,6 +668,7 @@ img {
   font-family: 'Lato', Arial, sans-serif;
   line-height: 1;
   margin-bottom: 0;
+  white-space: nowrap;
 }
 
 .geschichte-title-2 {
@@ -593,7 +676,7 @@ img {
   font-family: 'Lobster', cursive;
   font-weight: 400;
   text-transform: none;
-  font-size: 2.2em;
+  font-size: clamp(1.1rem, 5vw, 3rem);
   margin: 0;
   display: flex;
   align-items: center;
@@ -661,13 +744,11 @@ img {
 
 @media (max-width: 900px) {
   .geschichte-headline-tight .geschichte-title {
-    font-size: clamp(4em, 8vw, 6em);
     margin-right: -0.05em;
     margin-bottom: 0;
   }
 
   .geschichte-headline-tight .geschichte-title-2 {
-    font-size: 2em;
     margin: 0 -0.05em;
   }
 
@@ -680,19 +761,11 @@ img {
 
 @media (max-width: 600px) {
   .geschichte-title {
-    font-size: 10px;
-    display: block;
-    line-height: 1.1;
-    margin: 0.3em 0 0.1em 0;
     letter-spacing: 0;
-    word-break: normal;
     white-space: nowrap;
   }
 
   .geschichte-title-2 {
-    font-size: 10px;
-    display: block;
-    margin: 0.1em 0;
     white-space: nowrap;
   }
 
@@ -705,18 +778,29 @@ img {
 
 @media (max-width: 400px) {
   .geschichte-title {
-    font-size: 10px;
     letter-spacing: 0;
+    white-space: nowrap;
   }
 
   .geschichte-title-2 {
-    font-size: 10px;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 300px) {
+  .geschichte-title {
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
+  .geschichte-title-2 {
+    white-space: nowrap;
   }
 
   .geschichte-dots-inline {
-    width: 20px;
+    width: 16px;
     border-top-width: 2px;
-    margin: 0 0.2em;
+    margin: 0 0.15em;
   }
 }
 
@@ -727,7 +811,10 @@ img {
   background: #1c203a;
   min-height: unset;
   width: 100vw;
+  max-width: 100vw;
+  overflow-x: hidden;
   padding: 0 0 4em 0;
+  margin-top: -4px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -831,7 +918,7 @@ img {
   }
 
   .geschichte-header {
-    padding-top: 4.5em;
+    padding-top: 1.2em;
     margin-top: 0;
     margin-bottom: 0.1em;
   }
@@ -882,6 +969,8 @@ img {
   background: #fff;
   min-height: 100vh;
   width: 100vw;
+  max-width: 100vw;
+  overflow-x: hidden;
   padding: 0 0 5em 0;
   text-align: center;
   display: flex;
@@ -1300,8 +1389,9 @@ img {
   position: relative;
   min-height: 100vh;
   width: 100vw;
+  max-width: 100vw;
   padding: 0 0 2em 0;
-  overflow: visible;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1404,7 +1494,7 @@ img {
 }
 
 .zusagen-radio-group input[type="radio"] {
-  accent-color: #1c203a;
+  accent-color: #a7d6f7;
   width: 1.2em;
   height: 1.2em;
 }
@@ -1606,7 +1696,13 @@ img {
 }
 
 /* Footer-Text Breakpoints */
-@media (max-width: 400px) {
+@media (max-width: 300px) {
+  .footer-text-group { top: 28%; }
+}
+@media (min-width: 301px) and (max-width: 340px) {
+  .footer-text-group { top: 30%; }
+}
+@media (min-width: 341px) and (max-width: 400px) {
   .footer-text-group { top: 38%; }
 }
 @media (min-width: 401px) and (max-width: 600px) {
@@ -1713,19 +1809,7 @@ img {
 
 @media (max-width: 768px) {
 
-  /* Titel verkleinern */
-  .geschichte-title {
-    font-size: 10px;
-    letter-spacing: 0;
-    white-space: nowrap;
-  }
-
-  .geschichte-title-2 {
-    font-size: 10px;
-    white-space: nowrap;
-  }
-
-  /* Dots größer */
+  /* Dots Abstand */
   .geschichte-dots-inline {
     width: 28px;
     border-top-width: 2px;

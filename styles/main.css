@@ -1545,6 +1545,7 @@ img {
   gap: 0.5em;
   margin-top: 1.2em;
   margin-bottom: 1.2em;
+  padding-left: 0.8em;
 }
 
 .herzen-captcha-label {
@@ -1636,6 +1637,10 @@ img {
   color: #a7d6f7;
   margin: 0 0 0.2em;
   letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3em;
 }
 
 .zusagen-form-frist {
@@ -1873,6 +1878,13 @@ img {
   width: 2.2em;
   height: auto;
   filter: drop-shadow(0 0 4px rgba(255,255,255,0.7));
+}
+
+.formular-flugzeug-svg {
+  width: 1.1em;
+  height: auto;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 3px rgba(167,214,247,0.7));
 }
 
 @media (min-width: 900px) {

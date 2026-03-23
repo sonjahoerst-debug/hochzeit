@@ -1457,7 +1457,7 @@ img {
   border-radius: 0;
   margin-bottom: 2em;
   display: block;
-  box-shadow: -6px 0 14px rgba(28, 32, 58, 0.10);
+  filter: drop-shadow(-4px 4px 10px rgba(28, 32, 58, 0.18));
 }
 
 .bordkarte-front {

@@ -499,9 +499,9 @@ img {
 
 @media (min-width: 901px) {
   .hero {
-    min-height: 100vw;
-    height: 100vw;
-    max-height: 100vw;
+    min-height: 56.25vw;
+    height: 56.25vw;
+    max-height: 56.25vw;
     aspect-ratio: unset;
   }
 
@@ -510,8 +510,8 @@ img {
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
-    min-height: 100vw;
-    height: 100vw;
+    min-height: 56.25vw;
+    height: 56.25vw;
   }
 }
 

@@ -275,22 +275,23 @@ document.addEventListener('DOMContentLoaded', function () {
         var nachnameEl = document.getElementById('nachname');
         var emailEl    = document.getElementById('email');
         var anwesenheitEl = form.querySelector('input[name="anwesenheit"]:checked');
+        var isES = document.documentElement.lang === 'es' || (document.querySelector('.zusagen-form button[type="submit"]') && document.querySelector('.zusagen-form button[type="submit"]').textContent.trim() === 'Enviar');
         if (!anwesenheitEl) {
-          alert('Bitte Check-in oder Check-out auswählen.');
+          alert(isES ? 'Por favor elige Check-in o Check-out.' : 'Bitte Check-in oder Check-out auswählen.');
           return;
         }
         if (!vornameEl || vornameEl.value.trim() === '') {
-          alert('Bitte deinen Vornamen eingeben.');
+          alert(isES ? 'Por favor introduce tu nombre.' : 'Bitte deinen Vornamen eingeben.');
           if (vornameEl) vornameEl.focus();
           return;
         }
         if (!nachnameEl || nachnameEl.value.trim() === '') {
-          alert('Bitte deinen Nachnamen eingeben.');
+          alert(isES ? 'Por favor introduce tu apellido.' : 'Bitte deinen Nachnamen eingeben.');
           if (nachnameEl) nachnameEl.focus();
           return;
         }
         if (!emailEl || emailEl.value.trim() === '' || !emailEl.value.includes('@')) {
-          alert('Bitte eine gültige E-Mail-Adresse eingeben.');
+          alert(isES ? 'Por favor introduce un correo electrónico válido.' : 'Bitte eine gültige E-Mail-Adresse eingeben.');
           if (emailEl) emailEl.focus();
           return;
         }
@@ -301,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var herzenRichtig = parseInt(window._herzenCaptchaAnzahl, 10);
         if (!herzenAntwort || parseInt(herzenAntwort.value, 10) !== herzenRichtig) {
           if (herzenError) {
-            herzenError.textContent = 'Ups, das war leider falsch! 💔 Versuch es nochmal.';
+            herzenError.textContent = isES ? '¡Ups, eso no es correcto! 💔 Inténtalo de nuevo.' : 'Ups, das war leider falsch! 💔 Versuch es nochmal.';
             herzenError.style.display = 'block';
           }
           return;
@@ -311,7 +312,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // --- Pflichtfelder: Begleitpersonen ---
         var begleitung = form.querySelector('input[name="begleitung"]:checked');
         if (!begleitung) {
-          alert('Bitte die Anzahl der Begleitpersonen angeben.');
+          alert(isES ? 'Por favor indica el número de acompañantes.' : 'Bitte die Anzahl der Begleitpersonen angeben.');
           return;
         }
 
@@ -456,18 +457,48 @@ document.addEventListener('DOMContentLoaded', function () {
       const radioLabels = document.querySelectorAll('.zusagen-radio-group label span');
       if (radioLabels[0]) radioLabels[0].textContent = 'Check-in (an Bord gehen)';
       if (radioLabels[1]) radioLabels[1].textContent = 'Check-out (Leider nicht an Bord)';
-      const vorname = document.querySelector('.zusagen-form input[placeholder="Nombre"]');
-      if (vorname) vorname.placeholder = 'Vorname';
-      const nachname = document.querySelector('.zusagen-form input[placeholder="Apellido"]');
-      if (nachname) nachname.placeholder = 'Nachname';
-      const email = document.querySelector('.zusagen-form input[placeholder="Correo electrónico"]');
-      if (email) email.placeholder = 'E-Mail-Adresse';
-      const telefon = document.querySelector('.zusagen-form input[placeholder="Teléfono (opcional)"]');
-      if (telefon) telefon.placeholder = 'Telefon (optional)';
-      const nachricht = document.querySelector('.zusagen-form textarea');
-      if (nachricht) nachricht.placeholder = 'Besondere Hinweise, Wünsche oder Grüße....';
+      const radioPflicht = document.querySelector('.zusagen-radio-pflicht');
+      if (radioPflicht) radioPflicht.innerHTML = '<span class="pflicht-stern">*</span> Bitte auswählen';
+      const formHeader = document.querySelector('.zusagen-form-datum');
+      if (formHeader) formHeader.textContent = '✈ Boarding 29.05.2026';
+      const formFrist = document.querySelector('.zusagen-form-frist');
+      if (formFrist) formFrist.innerHTML = 'Bitte checke bis zum <strong>15.04.2026</strong> ein.';
+      // Persönliche Daten
+      const vornameEl = document.getElementById('vorname');
+      if (vornameEl) vornameEl.placeholder = 'Vorname *';
+      const nachnameEl = document.getElementById('nachname');
+      if (nachnameEl) nachnameEl.placeholder = 'Nachname *';
+      const emailEl = document.getElementById('email');
+      if (emailEl) emailEl.placeholder = 'E-Mail-Adresse *';
+      const telefonEl = document.querySelector('.zusagen-form input[type="tel"]');
+      if (telefonEl) telefonEl.placeholder = 'Telefon (optional)';
+      // Begleitung
+      const begleitLabel = document.querySelector('.zusagen-begleitung-label');
+      if (begleitLabel) begleitLabel.innerHTML = 'Reist du mit Begleitung? <span class="pflicht-stern">*</span>';
+      const begleitOptions = document.querySelectorAll('input[name="begleitung"] + span');
+      const begleitDE = ['Ich reise alleine', '+1 Lieblingsmensch', '+2 Herzensmenschen', '+3 Reisegruppe', '+4 Hochzeits-Crew', '+5 Partytruppe'];
+      begleitOptions.forEach(function (el, i) { if (begleitDE[i]) el.textContent = begleitDE[i]; });
+      // Essen
+      const essenLabel = document.querySelector('.zusagen-essen-label');
+      if (essenLabel) essenLabel.textContent = 'Gibt es Essenswünsche oder Unverträglichkeiten?';
+      const essenOptions = document.querySelectorAll('input[name="essen"] + span');
+      const essenDE = ['Alles\u00adsesser', 'Vegetarisch', 'Vegan', 'Sonstiges'];
+      essenOptions.forEach(function (el, i) { if (essenDE[i]) el.textContent = essenDE[i]; });
+      const essenSonstiges = document.getElementById('essen-sonstiges');
+      if (essenSonstiges) essenSonstiges.placeholder = 'Was darf\'s sein?';
+      // Captcha
+      const captchaLabel = document.querySelector('.herzen-captcha-label');
+      if (captchaLabel) captchaLabel.innerHTML = 'Safety Check – Wie viele Herzen siehst du? <span class="pflicht-stern">*</span>';
+      const captchaInput = document.getElementById('herzen-antwort');
+      if (captchaInput) captchaInput.placeholder = 'Deine Antwort...';
+      // Begleitungs-Namen-Felder aktualisieren
+      document.querySelectorAll('.begleitung-name-input').forEach(function (inp, i) {
+        inp.placeholder = 'Wie heißt Mitreisende/r ' + (i + 1) + '?';
+      });
       const submitBtn = document.querySelector('.zusagen-form button[type="submit"]');
       if (submitBtn) submitBtn.textContent = 'Abschicken';
+      const pflichtHinweis = document.querySelector('.zusagen-pflicht-hinweis');
+      if (pflichtHinweis) pflichtHinweis.textContent = '* Pflichtfelder';
       // Toast
       const toastTextEl = document.getElementById('zusagen-toast-text');
       if (toastTextEl) toastTextEl.textContent = 'Deine Sitzplätze sind gebucht!';
@@ -544,22 +575,51 @@ document.addEventListener('DOMContentLoaded', function () {
       const radioLabels = document.querySelectorAll('.zusagen-radio-group label span');
       if (radioLabels[0]) radioLabels[0].textContent = 'Check-in (subir a bordo)';
       if (radioLabels[1]) radioLabels[1].textContent = 'Check-out (Lamentablemente no a bordo)';
-      const vorname = document.querySelector('.zusagen-form input[placeholder="Vorname"]');
-      if (vorname) vorname.placeholder = 'Nombre';
-      const nachname = document.querySelector('.zusagen-form input[placeholder="Nachname"]');
-      if (nachname) nachname.placeholder = 'Apellido';
-      const email = document.querySelector('.zusagen-form input[placeholder="E-Mail-Adresse"]');
-      if (email) email.placeholder = 'Correo electrónico';
-      const telefon = document.querySelector('.zusagen-form input[placeholder="Telefon (optional)"]');
-      if (telefon) telefon.placeholder = 'Teléfono (opcional)';
-      const nachricht = document.querySelector('.zusagen-form textarea');
-      if (nachricht) nachricht.placeholder = 'Indicaciones especiales, deseos o saludos...';
+      const radioPflicht = document.querySelector('.zusagen-radio-pflicht');
+      if (radioPflicht) radioPflicht.innerHTML = '<span class="pflicht-stern">*</span> Por favor elige una opción';
+      const formHeader = document.querySelector('.zusagen-form-datum');
+      if (formHeader) formHeader.textContent = '✈ Embarque 29.05.2026';
+      const formFrist = document.querySelector('.zusagen-form-frist');
+      if (formFrist) formFrist.innerHTML = 'Por favor confirma antes del <strong>15.04.2026</strong>.';
+      // Persönliche Daten
+      const vornameEl = document.getElementById('vorname');
+      if (vornameEl) vornameEl.placeholder = 'Nombre *';
+      const nachnameEl = document.getElementById('nachname');
+      if (nachnameEl) nachnameEl.placeholder = 'Apellido *';
+      const emailEl = document.getElementById('email');
+      if (emailEl) emailEl.placeholder = 'Correo electrónico *';
+      const telefonEl = document.querySelector('.zusagen-form input[type="tel"]');
+      if (telefonEl) telefonEl.placeholder = 'Teléfono (opcional)';
+      // Begleitung
+      const begleitLabel = document.querySelector('.zusagen-begleitung-label');
+      if (begleitLabel) begleitLabel.innerHTML = '¿Viajas con acompañante? <span class="pflicht-stern">*</span>';
+      const begleitOptions = document.querySelectorAll('input[name="begleitung"] + span');
+      const begleitES = ['Viajo solo/a', '+1 persona especial', '+2 personas del corazón', '+3 grupo viajero', '+4 equipo de bodas', '+5 grupo fiestero'];
+      begleitOptions.forEach(function (el, i) { if (begleitES[i]) el.textContent = begleitES[i]; });
+      // Essen
+      const essenLabel = document.querySelector('.zusagen-essen-label');
+      if (essenLabel) essenLabel.textContent = '¿Tienes preferencias alimentarias o intolerancias?';
+      const essenOptions = document.querySelectorAll('input[name="essen"] + span');
+      const essenES = ['Como de todo', 'Vegetariano/a', 'Vegano/a', 'Otros'];
+      essenOptions.forEach(function (el, i) { if (essenES[i]) el.textContent = essenES[i]; });
+      const essenSonstiges = document.getElementById('essen-sonstiges');
+      if (essenSonstiges) essenSonstiges.placeholder = '¿Qué prefieres?';
+      // Captcha
+      const captchaLabel = document.querySelector('.herzen-captcha-label');
+      if (captchaLabel) captchaLabel.innerHTML = 'Safety Check – ¿Cuántos corazones ves? <span class="pflicht-stern">*</span>';
+      const captchaInput = document.getElementById('herzen-antwort');
+      if (captchaInput) captchaInput.placeholder = 'Tu respuesta...';
+      // Begleitungs-Namen-Felder aktualisieren
+      document.querySelectorAll('.begleitung-name-input').forEach(function (inp, i) {
+        inp.placeholder = '¿Cómo se llama el/la acompañante ' + (i + 1) + '?';
+      });
       const submitBtn = document.querySelector('.zusagen-form button[type="submit"]');
       if (submitBtn) submitBtn.textContent = 'Enviar';
+      const pflichtHinweis = document.querySelector('.zusagen-pflicht-hinweis');
+      if (pflichtHinweis) pflichtHinweis.textContent = '* Campos obligatorios';
       // Toast
       const toastTextEl = document.getElementById('zusagen-toast-text');
       if (toastTextEl) toastTextEl.textContent = '¡Tus asientos están reservados!';
-      // Toast-Texte für Spanisch merken
       toastTextEl && toastTextEl.setAttribute('data-zusage', '¡Tus asientos están reservados!');
       toastTextEl && toastTextEl.setAttribute('data-absage', '¡Qué pena que no puedas estar!');
     }
@@ -617,11 +677,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateNamenFelder(anzahl) {
       container.innerHTML = '';
+      var isES = document.querySelector('.zusagen-form button[type="submit"]') && document.querySelector('.zusagen-form button[type="submit"]').textContent.trim() === 'Enviar';
       for (var i = 1; i <= anzahl; i++) {
         var inp = document.createElement('input');
         inp.type = 'text';
         inp.name = 'begleitung_name_' + i;
-        inp.placeholder = 'Wie heißt Mitreisende/r ' + i + '?';
+        inp.placeholder = isES ? '¿Cómo se llama el/la acompañante ' + i + '?' : 'Wie heißt Mitreisende/r ' + i + '?';
         inp.classList.add('begleitung-name-input');
         container.appendChild(inp);
       }

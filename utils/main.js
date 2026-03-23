@@ -396,11 +396,9 @@ document.addEventListener('DOMContentLoaded', function () {
       document.querySelector('a[href="#geschenke"]').textContent = 'Geschenke';
       document.querySelector('a[href="#zusagen"]').textContent = 'Zusagen';
 
-      // Hero
-      const heroTitle = document.querySelector('.hero-title');
-      if (heroTitle) heroTitle.textContent = 'DIANA & JULIAN';
-      const heroSub = document.querySelector('.hero-subtitle-text');
-      if (heroSub) heroSub.textContent = 'Begleite uns auf unserem schönsten Abenteuer';
+      // Hero – aria-label aktualisieren
+      const heroEl = document.getElementById('start');
+      if (heroEl) heroEl.setAttribute('aria-label', 'Diana und Julian – Begleite uns auf unserem schönsten Abenteuer');
 
       // Geschichte – Überschrift
       const gTitle = document.querySelector('#geschichte .geschichte-title');
@@ -515,10 +513,9 @@ document.addEventListener('DOMContentLoaded', function () {
       document.querySelector('a[href="#zusagen"]').textContent = 'Confirmar';
 
       // Hero
-      const heroTitle = document.querySelector('.hero-title');
-      if (heroTitle) heroTitle.textContent = 'DIANA & JULIAN';
-      const heroSub = document.querySelector('.hero-subtitle-text');
-      if (heroSub) heroSub.textContent = 'Acompáñanos en nuestra aventura más bonita';
+      // Hero – aria-label aktualisieren
+      const heroEl = document.getElementById('start');
+      if (heroEl) heroEl.setAttribute('aria-label', 'Diana y Julian – Acompáñanos en nuestra aventura más bonita');
 
       // Geschichte – Überschrift
       const gTitle = document.querySelector('#geschichte .geschichte-title');

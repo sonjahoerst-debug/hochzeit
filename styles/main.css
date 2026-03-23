@@ -1931,11 +1931,11 @@ img {
   }
 
   .zusagen-header-gap {
-    height: 1em;
+    height: 0.3em;
   }
 
   .zusagen-bordkarte-wrapper {
-    margin-top: 8em;
+    margin-top: 4em;
   }
 
   .bordkarte-img {
@@ -2128,9 +2128,12 @@ img {
   .details-content,
   .anfahrt-boxes,
   .geschenke-content,
-  .zusagen-bordkarte-wrapper,
-  .zusagen-form-wrapper {
+  .zusagen-bordkarte-wrapper {
     margin-top: 2rem;
+  }
+
+  .zusagen-form-wrapper {
+    margin-top: 0.5rem;
   }
 
   /* Details: Abstand zwischen details-info und Map */

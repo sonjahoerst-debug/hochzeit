@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Parisienne&family=Lobster&family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles/main.css">
+  <!-- Kein externes Captcha nötig -->
 </head>
 <body>
 
@@ -199,7 +200,21 @@
     </div>
     <div class="zusagen-header-gap"></div>
     <div class="zusagen-form-wrapper">
-      <form class="zusagen-form" id="zusagen-form">
+      <form class="zusagen-form" id="zusagen-form" novalidate>
+        <!-- Honeypot: unsichtbar für Menschen, Bots füllen es aus -->
+        <div class="hp-field" aria-hidden="true">
+          <input type="text" name="website" id="hp-website" tabindex="-1" autocomplete="off">
+        </div>
+        <!-- Zeitstempel für Bot-Erkennung (zu schnell = Bot) -->
+        <input type="hidden" name="form_time" id="form-time">
+
+        <!-- Formular-Header -->
+        <div class="zusagen-form-header">
+          <p class="zusagen-form-datum">✈ Boarding 29.05.2026</p>
+          <p class="zusagen-form-frist">Bitte checke bis zum <strong>15.04.2026</strong> ein.</p>
+        </div>
+
+        <!-- Check-in / Check-out -->
         <div class="zusagen-radio-group">
           <label>
             <input type="radio" name="anwesenheit" value="zusage" required>
@@ -209,13 +224,60 @@
             <input type="radio" name="anwesenheit" value="absage">
             <span>Check-out (Leider nicht an Bord)</span>
           </label>
+          <p class="zusagen-radio-pflicht"><span class="pflicht-stern">*</span> Bitte auswählen</p>
         </div>
-        <input type="text" placeholder="Vorname" required>
-        <input type="text" placeholder="Nachname" required>
-        <input type="email" placeholder="E-Mail-Adresse" required>
+
+        <!-- Persönliche Daten -->
+        <input type="text" id="vorname" name="vorname" placeholder="Vorname *" required>
+        <input type="text" id="nachname" name="nachname" placeholder="Nachname *" required>
+        <input type="email" id="email" name="email" placeholder="E-Mail-Adresse *" required>
         <input type="tel" placeholder="Telefon (optional)">
-        <textarea placeholder="Besondere Hinweise, Wünsche oder Grüße...."></textarea>
+
+        <!-- Begleitpersonen -->
+        <div class="zusagen-begleitung-group">
+          <label class="zusagen-begleitung-label">Reist du mit Begleitung? <span class="pflicht-stern">*</span></label>
+          <div class="zusagen-radio-inline">
+            <label><input type="radio" name="begleitung" value="0" required><span>Ich reise alleine</span></label>
+            <label><input type="radio" name="begleitung" value="1"><span>+1 Lieblingsmensch</span></label>
+          </div>
+          <div class="zusagen-radio-inline">
+            <label><input type="radio" name="begleitung" value="2"><span>+2 Herzensmenschen</span></label>
+          </div>
+          <div class="zusagen-radio-inline">
+            <label><input type="radio" name="begleitung" value="3"><span>+3 Reisegruppe</span></label>
+            <label><input type="radio" name="begleitung" value="4"><span>+4 Hochzeits-Crew</span></label>
+          </div>
+          <div class="zusagen-radio-inline">
+            <label><input type="radio" name="begleitung" value="5"><span>+5 Partytruppe</span></label>
+          </div>
+        </div>
+        <!-- Namen der Begleitpersonen – wird per JS dynamisch eingeblendet -->
+        <div id="begleitung-namen" class="begleitung-namen-wrapper"></div>
+
+        <!-- Unterkunft -->
+        <input type="text" id="unterkunft" name="unterkunft" placeholder="Hast du schon eine Unterkunft? (optional)">
+
+        <!-- Essenswünsche -->
+        <div class="zusagen-essen-group">
+          <label class="zusagen-essen-label">Gibt es Essenswünsche oder Unverträglichkeiten?</label>
+          <div class="zusagen-radio-grid-2">
+            <label><input type="radio" name="essen" value="allesser"><span>Alles­esser</span></label>
+            <label><input type="radio" name="essen" value="vegetarisch"><span>Vegetarisch</span></label>
+            <label><input type="radio" name="essen" value="vegan"><span>Vegan</span></label>
+            <label><input type="radio" name="essen" value="sonstiges"><span>Sonstiges</span></label>
+          </div>
+          <textarea id="essen-sonstiges" name="essen_sonstiges" class="essen-sonstiges-input" placeholder="Was darf's sein?" rows="2" style="display:none;"></textarea>
+        </div>
+
+        <!-- Herzen-Captcha -->
+        <div class="herzen-captcha-wrapper">
+          <label class="herzen-captcha-label">Safety Check – Wie viele Herzen siehst du? <span class="pflicht-stern">*</span></label>
+          <div class="herzen-captcha-display" id="herzen-display" aria-label="Herzen zählen"></div>
+          <input type="number" id="herzen-antwort" class="herzen-captcha-input" placeholder="Deine Antwort..." min="1" max="10" autocomplete="off">
+          <span class="herzen-captcha-error" id="herzen-error"></span>
+        </div>
         <button type="submit">Abschicken</button>
+        <p class="zusagen-pflicht-hinweis">* Pflichtfelder</p>
       </form>
       <!-- Bestätigungs-Toast -->
       <div class="zusagen-toast" id="zusagen-toast">

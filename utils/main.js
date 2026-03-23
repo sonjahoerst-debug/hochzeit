@@ -237,6 +237,12 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
+    // Zeitstempel beim Laden setzen (Bot-Erkennung: zu schnell = Bot)
+    var formTimeField = document.getElementById('form-time');
+    if (formTimeField) {
+      formTimeField.value = Date.now();
+    }
+
     // Formular Submit
     var form = document.getElementById('zusagen-form');
     var toast = document.getElementById('zusagen-toast');
@@ -246,8 +252,70 @@ document.addEventListener('DOMContentLoaded', function () {
       form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        var anwesenheit = form.querySelector('input[name="anwesenheit"]:checked');
-        var isZusage = anwesenheit && anwesenheit.value === 'zusage';
+        // --- SPAM-SCHUTZ: Honeypot prüfen ---
+        var honeypot = document.getElementById('hp-website');
+        if (honeypot && honeypot.value !== '') {
+          // Bot hat das versteckte Feld ausgefüllt → still ignorieren
+          console.warn('Spam erkannt (Honeypot).');
+          return;
+        }
+
+        // --- SPAM-SCHUTZ: Zeitstempel prüfen (< 3 Sekunden = Bot) ---
+        var formTime = document.getElementById('form-time');
+        if (formTime) {
+          var elapsed = (Date.now() - parseInt(formTime.value, 10)) / 1000;
+          if (elapsed < 3) {
+            console.warn('Spam erkannt (zu schnell ausgefüllt).');
+            return;
+          }
+        }
+
+        // --- Pflichtfelder: Vorname, Nachname, E-Mail ---
+        var vornameEl  = document.getElementById('vorname');
+        var nachnameEl = document.getElementById('nachname');
+        var emailEl    = document.getElementById('email');
+        var anwesenheitEl = form.querySelector('input[name="anwesenheit"]:checked');
+        if (!anwesenheitEl) {
+          alert('Bitte Check-in oder Check-out auswählen.');
+          return;
+        }
+        if (!vornameEl || vornameEl.value.trim() === '') {
+          alert('Bitte deinen Vornamen eingeben.');
+          if (vornameEl) vornameEl.focus();
+          return;
+        }
+        if (!nachnameEl || nachnameEl.value.trim() === '') {
+          alert('Bitte deinen Nachnamen eingeben.');
+          if (nachnameEl) nachnameEl.focus();
+          return;
+        }
+        if (!emailEl || emailEl.value.trim() === '' || !emailEl.value.includes('@')) {
+          alert('Bitte eine gültige E-Mail-Adresse eingeben.');
+          if (emailEl) emailEl.focus();
+          return;
+        }
+
+        // --- SPAM-SCHUTZ: Herzen-Captcha prüfen ---
+        var herzenAntwort = document.getElementById('herzen-antwort');
+        var herzenError   = document.getElementById('herzen-error');
+        var herzenRichtig = parseInt(window._herzenCaptchaAnzahl, 10);
+        if (!herzenAntwort || parseInt(herzenAntwort.value, 10) !== herzenRichtig) {
+          if (herzenError) {
+            herzenError.textContent = 'Ups, das war leider falsch! 💔 Versuch es nochmal.';
+            herzenError.style.display = 'block';
+          }
+          return;
+        }
+        if (herzenError) herzenError.style.display = 'none';
+
+        // --- Pflichtfelder: Begleitpersonen ---
+        var begleitung = form.querySelector('input[name="begleitung"]:checked');
+        if (!begleitung) {
+          alert('Bitte die Anzahl der Begleitpersonen angeben.');
+          return;
+        }
+
+        var isZusage = anwesenheitEl && anwesenheitEl.value === 'zusage';
 
         // Toast-Text und Icon je nach Auswahl
         if (isZusage) {
@@ -264,10 +332,10 @@ document.addEventListener('DOMContentLoaded', function () {
         // Toast einblenden
         toast.classList.add('sichtbar');
 
-        // Toast nach 4 Sekunden wieder ausblenden
+        // Toast nach 7 Sekunden wieder ausblenden
         setTimeout(function () {
           toast.classList.remove('sichtbar');
-        }, 4000);
+        }, 7000);
       });
     }
   })();
@@ -497,7 +565,77 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  // ----------------------------------------------------------
+  // HERZEN-CAPTCHA
+  // ----------------------------------------------------------
+  window.herzenCaptchaInit = function () {
+    var anzahl = 2; // Immer 2 – für Diana & Julian ♡
+    window._herzenCaptchaAnzahl = anzahl;
+    var display = document.getElementById('herzen-display');
+    if (!display) return;
+    var html = '';
+    for (var i = 0; i < anzahl; i++) {
+      var size  = (2.4 + Math.random() * 0.4).toFixed(2);
+      var rot   = (Math.random() * 16 - 8).toFixed(1);
+      var delay = (i * 0.35).toFixed(2);
+      html += '<span style="font-size:' + size + 'em;display:inline-block;transform:rotate(' + rot + 'deg);animation-delay:' + delay + 's;margin:0 0.2em;color:#fff;text-shadow:0 1px 8px rgba(167,214,247,0.9),0 0 4px rgba(255,255,255,0.7);" class="herzen-captcha-herz">♡</span>';
+    }
+    display.innerHTML = html;
+    var err = document.getElementById('herzen-error');
+    if (err) err.style.display = 'none';
+    var input = document.getElementById('herzen-antwort');
+    if (input) input.value = '';
+  };
+
+  // Beim Laden initialisieren
+  window.herzenCaptchaInit();
+  // Sicherheits-Fallback: nochmal nach kurzem Delay (falls DOM noch lädt)
+  setTimeout(window.herzenCaptchaInit, 300);
+
+  // ----------------------------------------------------------
+  // ESSEN – Sonstiges-Feld ein-/ausblenden
+  // ----------------------------------------------------------
+  (function initEssenSonstiges() {
+    var essenRadios = document.querySelectorAll('input[name="essen"]');
+    var sonstigesInput = document.getElementById('essen-sonstiges');
+    if (!sonstigesInput) return;
+    essenRadios.forEach(function (radio) {
+      radio.addEventListener('change', function () {
+        sonstigesInput.style.display = this.value === 'sonstiges' ? 'block' : 'none';
+        if (this.value !== 'sonstiges') sonstigesInput.value = '';
+      });
+    });
+  })();
+
+  // ----------------------------------------------------------
+  // BEGLEITPERSONEN – Namen-Felder dynamisch einblenden
+  // ----------------------------------------------------------
+  (function initBegleitungNamen() {
+    var radios = document.querySelectorAll('input[name="begleitung"]');
+    var container = document.getElementById('begleitung-namen');
+    if (!container) return;
+
+    function updateNamenFelder(anzahl) {
+      container.innerHTML = '';
+      for (var i = 1; i <= anzahl; i++) {
+        var inp = document.createElement('input');
+        inp.type = 'text';
+        inp.name = 'begleitung_name_' + i;
+        inp.placeholder = 'Wie heißt Mitreisende/r ' + i + '?';
+        inp.classList.add('begleitung-name-input');
+        container.appendChild(inp);
+      }
+    }
+
+    radios.forEach(function (radio) {
+      radio.addEventListener('change', function () {
+        var val = parseInt(this.value, 10);
+        updateNamenFelder(isNaN(val) || val === 0 ? 0 : val);
+      });
+    });
+  })();
+
   // Sprachfunktion global verfügbar machen (für onclick-Attribute)
   window.switchLanguage = setLanguage;
 
-});
+}); // Ende DOMContentLoaded

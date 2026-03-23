@@ -1525,8 +1525,223 @@ img {
 
 .zusagen-radio-group input[type="radio"] {
   accent-color: #a7d6f7;
-  width: 1.2em;
-  height: 1.2em;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.zusagen-begleitung-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  margin-top: 1.2em;
+  margin-bottom: 1.2em;
+  padding-left: 0.8em;
+}
+
+/* Herzen-Captcha */
+.herzen-captcha-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  margin-top: 1.2em;
+  margin-bottom: 1.2em;
+}
+
+.herzen-captcha-label {
+  font-size: 1em;
+  color: #fff;
+  font-family: 'Lato', Arial, sans-serif;
+  font-weight: 600;
+}
+
+.herzen-captcha-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3em;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.5em;
+  padding: 0.6em 0.8em;
+  user-select: none;
+}
+
+.herzen-captcha-herz {
+  display: inline-block;
+  animation: herzPuls 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes herzPuls {
+  from { transform: scale(1) rotate(var(--rot, 0deg)); }
+  to   { transform: scale(1.12) rotate(var(--rot, 0deg)); }
+}
+
+.herzen-captcha-input {
+  background: #fff;
+  color: #1c203a;
+  border: 2px solid #a7d6f7;
+  border-radius: 8px;
+  padding: 0.7em;
+  font-size: 1em;
+  font-family: 'Lato', Arial, sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 180px;
+  display: block;
+  margin: 0 auto;
+}
+
+.herzen-captcha-error {
+  display: none;
+  color: #fff;
+  font-size: 0.9em;
+  font-family: 'Lato', Arial, sans-serif;
+}
+
+
+.pflicht-stern {
+  color: #a7d6f7;
+  font-weight: 700;
+}
+
+.begleitung-namen-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  margin-bottom: 0.5em;
+}
+
+.begleitung-name-input {
+  background: #fff;
+  color: #1c203a;
+  border: 1px solid #a7d6f7;
+  border-radius: 8px;
+  padding: 0.7em;
+  font-size: 1em;
+  font-family: 'Lato', Arial, sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Formular-Header: Datum + Frist */
+.zusagen-form-header {
+  text-align: center;
+  margin-bottom: 1.5em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid rgba(167,214,247,0.25);
+}
+
+.zusagen-form-datum {
+  font-family: 'Lobster', cursive;
+  font-size: 1.6em;
+  color: #a7d6f7;
+  margin: 0 0 0.2em;
+  letter-spacing: 0.03em;
+}
+
+.zusagen-form-frist {
+  font-family: 'Lato', Arial, sans-serif;
+  font-size: 0.95em;
+  color: rgba(255,255,255,0.85);
+  margin: 0;
+}
+
+/* Essen-Sektion */
+.zusagen-essen-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  margin-top: 1.2em;
+  margin-bottom: 1.2em;
+  padding-left: 0.8em;
+}
+
+.zusagen-essen-label {
+  font-size: 1em;
+  color: #fff;
+  font-family: 'Lato', Arial, sans-serif;
+  font-weight: 600;
+  margin-bottom: 0.4em;
+}
+
+.essen-sonstiges-input {
+  background: #fff;
+  color: #1c203a;
+  border: 1px solid #a7d6f7;
+  border-radius: 8px;
+  padding: 0.7em;
+  font-size: 1em;
+  font-family: 'Lato', Arial, sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0.3em;
+}
+
+.zusagen-pflicht-hinweis {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.85em;
+  font-family: 'Lato', Arial, sans-serif;
+  text-align: center;
+  margin: 0.2em 0 1em;
+}
+
+.zusagen-radio-pflicht {
+  font-size: 0.82em;
+  color: rgba(255,255,255,0.55);
+  font-family: 'Lato', Arial, sans-serif;
+  margin: 0.3em 0 0;
+}
+
+.zusagen-begleitung-label {
+  font-size: 1em;
+  color: #fff;
+  font-family: 'Lato', Arial, sans-serif;
+  font-weight: 600;
+  margin-bottom: 0.4em;
+}
+
+.zusagen-radio-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75em 1.4em;
+}
+
+.zusagen-radio-inline label {
+  font-size: 1em;
+  color: #fff;
+  font-family: 'Lato', Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
+  cursor: pointer;
+}
+
+.zusagen-radio-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75em 1.4em;
+}
+
+.zusagen-radio-grid-2 label {
+  font-size: 1em;
+  color: #fff;
+  font-family: 'Lato', Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
+  cursor: pointer;
+}
+
+.zusagen-radio-grid-2 input[type="radio"] {
+  accent-color: #a7d6f7;
+  width: 1.5em;
+  height: 1.5em;
+  flex-shrink: 0;
+}
+
+.zusagen-radio-inline input[type="radio"] {
+  accent-color: #a7d6f7;
+  width: 1.5em;
+  height: 1.5em;
 }
 
 .zusagen-form input,
@@ -1555,6 +1770,23 @@ img {
   min-height: 80px;
   resize: vertical;
   font-family: 'Lato', Arial, sans-serif;
+}
+
+/* Honeypot-Feld: für Menschen unsichtbar, für Bots sichtbar */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* hCaptcha Widget Abstand */
+.h-captcha {
+  margin: 0.5em 0 1em 0;
 }
 
 .zusagen-form button {
@@ -1596,30 +1828,35 @@ img {
 
 /* Toast-Benachrichtigung nach Formular-Absenden */
 .zusagen-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 8vh;
+  transform: translateX(-50%) translateY(20px) scale(0.95);
+  z-index: 9999;
   display: flex;
   align-items: center;
-  gap: 0.6em;
+  gap: 0.8em;
   background: #1c203a;
   color: #fff;
   border: 2px solid #a7d6f7;
-  border-radius: 14px;
-  padding: 0.9em 1.6em;
+  border-radius: 16px;
+  padding: 1.2em 2em;
   font-family: 'Lato', Arial, sans-serif;
-  font-size: 1.05em;
+  font-size: 1.15em;
   font-weight: 600;
-  box-shadow: 0 6px 24px rgba(28,32,58,0.18);
-  margin-top: 1.2em;
+  box-shadow: 0 8px 40px rgba(28,32,58,0.35);
   opacity: 0;
-  transform: translateY(16px) scale(0.95);
   pointer-events: none;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  max-width: 340px;
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  max-width: 90vw;
+  width: max-content;
   text-align: center;
+  white-space: nowrap;
 }
 
 .zusagen-toast.sichtbar {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateX(-50%) translateY(0) scale(1);
   pointer-events: auto;
 }
 

@@ -13,7 +13,7 @@
 
 // --- Konfiguration ---
 define('HCAPTCHA_SECRET', 'DEIN_HCAPTCHA_SECRET_KEY');
-define('MAIL_1',          'rsvp@hoerts.org');
+define('MAIL_1',          'rsvp@hoerst.org');
 define('MAIL_2',          'Dianamartin1112@gmail.com');
 define('CSV_FILE',        __DIR__ . '/anmeldungen.csv');
 define('ALLOWED_ORIGIN',  'https://sonjahoerst-debug.github.io');
@@ -125,7 +125,7 @@ $mailBody .= "Begleitpersonen:  {$begleitung}\n";
 $mailBody .= "Übernachtung:     {$uebernachtung}\n";
 $mailBody .= "Nachricht:\n{$nachricht}\n";
 
-$headers  = "From: hochzeit@hoerts.org\r\n";
+$headers  = "From: rsvp@hoerst.org\r\n";
 $headers .= "Reply-To: {$email}\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 

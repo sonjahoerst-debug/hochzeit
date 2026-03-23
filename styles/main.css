@@ -341,6 +341,11 @@ img {
 }
 
 @media (max-width: 600px) {
+  .navigation {
+    background: transparent;
+    box-shadow: none;
+  }
+
   .burger {
     left: 1em;
     right: auto;
@@ -501,9 +506,9 @@ img {
 
 @media (min-width: 901px) {
   .hero {
-    min-height: 56.25vw;
-    height: 56.25vw;
-    max-height: 56.25vw;
+    min-height: 65vw;
+    height: 65vw;
+    max-height: 65vw;
     aspect-ratio: unset;
   }
 
@@ -512,8 +517,8 @@ img {
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
-    min-height: 56.25vw;
-    height: 56.25vw;
+    min-height: 65vw;
+    height: 65vw;
   }
 }
 
@@ -528,6 +533,7 @@ img {
     min-height: 120vw;
     height: 120vw;
     max-height: 120vw;
+    margin-top: 0;
   }
 
   .hero-bg {

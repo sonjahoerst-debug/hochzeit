@@ -1840,7 +1840,7 @@ img {
   color: #fff;
   border: 2px solid #a7d6f7;
   border-radius: 16px;
-  padding: 1.2em 2em;
+  padding: 1.2em 1.6em;
   font-family: 'Lato', Arial, sans-serif;
   font-size: 1.15em;
   font-weight: 600;
@@ -1848,10 +1848,12 @@ img {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.45s ease, transform 0.45s ease;
-  max-width: 90vw;
-  width: max-content;
+  max-width: min(90vw, 480px);
+  width: auto;
   text-align: center;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
+  box-sizing: border-box;
 }
 
 .zusagen-toast.sichtbar {

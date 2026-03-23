@@ -1602,6 +1602,7 @@ img {
 .pflicht-stern {
   color: #a7d6f7;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .begleitung-namen-wrapper {

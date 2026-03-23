@@ -488,7 +488,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (essenSonstiges) essenSonstiges.placeholder = 'Was darf\'s sein?';
       // Captcha
       const captchaLabel = document.querySelector('.herzen-captcha-label');
-      if (captchaLabel) captchaLabel.innerHTML = 'Safety Check – Wie viele Herzen siehst du? <span class="pflicht-stern">*</span>';
+      if (captchaLabel) captchaLabel.innerHTML = 'Safety Check: Wie viele Herzen siehst du?<span class="pflicht-stern">*</span>';
       const captchaInput = document.getElementById('herzen-antwort');
       if (captchaInput) captchaInput.placeholder = 'Deine Antwort...';
       // Begleitungs-Namen-Felder aktualisieren
@@ -606,7 +606,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (essenSonstiges) essenSonstiges.placeholder = '¿Qué prefieres?';
       // Captcha
       const captchaLabel = document.querySelector('.herzen-captcha-label');
-      if (captchaLabel) captchaLabel.innerHTML = 'Safety Check – ¿Cuántos corazones ves? <span class="pflicht-stern">*</span>';
+      if (captchaLabel) captchaLabel.innerHTML = 'Safety Check: ¿Cuántos corazones ves?<span class="pflicht-stern">*</span>';
       const captchaInput = document.getElementById('herzen-antwort');
       if (captchaInput) captchaInput.placeholder = 'Tu respuesta...';
       // Begleitungs-Namen-Felder aktualisieren

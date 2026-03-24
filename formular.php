@@ -14,7 +14,7 @@
 define('MAIL_TO',         'rsvp@hoerst.org');
 define('MAIL_CC',         'Dianamartin1112@gmail.com');
 define('CSV_FILE',        __DIR__ . '/anmeldungen.csv');
-define('ALLOWED_ORIGIN',  'https://www.hochzeit.hoerst.org');
+define('ALLOWED_ORIGIN',  'https://hochzeit.hoerst.org');
 
 // --- CORS & Header ---
 header('Access-Control-Allow-Origin: ' . ALLOWED_ORIGIN);

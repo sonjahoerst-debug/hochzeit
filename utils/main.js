@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', function () {
         formData.append('form_time',      (document.getElementById('form-time') || {}).value || '');
 
         // --- An PHP senden ---
-        fetch('https://www.hochzeit.hoerst.org/formular.php', {
+        fetch('http://access-5020079354.webspace-host.com/formular.php', {
           method: 'POST',
           body: formData
         }).catch(function() {

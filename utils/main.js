@@ -318,6 +318,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var isZusage = anwesenheitEl && anwesenheitEl.value === 'zusage';
 
+        // --- Formulardaten sammeln ---
+        var begleitNamenInputs = form.querySelectorAll('.begleitung-name-input');
+        var begleitNamenArr = [];
+        begleitNamenInputs.forEach(function(inp) {
+          if (inp.value.trim()) begleitNamenArr.push(inp.value.trim());
+        });
+
+        var formData = new FormData();
+        formData.append('anwesenheit',    anwesenheitEl ? anwesenheitEl.value : '');
+        formData.append('vorname',        vornameEl ? vornameEl.value.trim() : '');
+        formData.append('nachname',       nachnameEl ? nachnameEl.value.trim() : '');
+        formData.append('email',          emailEl ? emailEl.value.trim() : '');
+        formData.append('telefon',        (form.querySelector('[name="telefon"]') || {}).value || '');
+        formData.append('begleitung',     begleitung ? begleitung.value : '0');
+        formData.append('begleit_namen',  begleitNamenArr.join(', '));
+        formData.append('unterkunft',     (document.getElementById('unterkunft') || {}).value || '');
+        var essenEl = form.querySelector('input[name="essen"]:checked');
+        formData.append('essen',          essenEl ? essenEl.value : '');
+        formData.append('essen_sonstiges',(document.getElementById('essen-sonstiges') || {}).value || '');
+        formData.append('website',        (document.getElementById('hp-website') || {}).value || '');
+        formData.append('form_time',      (document.getElementById('form-time') || {}).value || '');
+
+        // --- An PHP senden ---
+        fetch('https://www.hochzeit.hoerst.org/formular.php', {
+          method: 'POST',
+          body: formData
+        }).catch(function() {
+          // Netzwerkfehler still ignorieren – Toast trotzdem zeigen
+        });
+
         // Toast-Text und Icon je nach Auswahl
         if (isZusage) {
           toast.querySelector('.zusagen-toast-icon').innerHTML = '<svg viewBox="0 0 616.15 470.28" xmlns="http://www.w3.org/2000/svg" class="toast-flugzeug-svg"><path d="M317.76,261.37s-2.49-14.19-8.1-23.66c-5.6-9.46-36.12-50.27-36.12-50.27l-26.15-33.12s-16.19-18.04-22.42-20.7c-6.23-2.66,4.98-11.53,16.19-5.32,11.21,6.21,90.29,81.61,90.29,81.61l9.96.59s2.18-6.8,11.83-13.6c9.65-6.8,21.17-.3,24.29,5.91s4.98,15.08-3.42,19.81-18.99,3.84-18.99,3.84l10.59,15.38,29.27-8.87s10.59-5.03,29.89-8.87c19.3-3.84,26.78,5.91,26.78,5.91,0,0,8.1,14.49-18.68,29.57-26.78,15.08-47.32,22.47-47.32,22.47l-11.21,34.3s28.33-20.99,31.76,2.37c3.42,23.36-17.12,15.08-21.79,15.38-4.67.3-14.32,0-14.32,0,0,0-31.13,106.75-36.12,119.46-4.98,12.72-7.47,14.79-7.47,14.79,0,0-9.03,4.44-10.59-2.37s18.06-107.04,19.3-127.74c1.25-20.7-3.74-33.71-3.74-33.71l-47.95,20.11-32.38,13.6s-12.14,49.09-13.7,57.96c-1.56,8.87-8.1,8.28-8.1,8.28l-1.25-69.19s-23.97,5.62-37.36,7.69-26.78-1.18-26.78-1.18c0,0,4.98-9.17,21.79-13.6s36.74-11.24,36.74-11.24c0,0-28.96-47.02-33-55.59-4.05-8.58,3.74-7.39,9.34-2.37,5.6,5.03,39.23,43.76,44.21,45.54,4.98,1.77,74.72-43.17,74.72-43.17Z" fill="white"/></svg>';

@@ -680,7 +680,7 @@ img {
 
 .geschichte-title {
   font-size: clamp(2rem, 12vw, 7em);
-  font-weight: 400;
+  font-weight: 700;
   color: #a7d6f7;
   letter-spacing: 0.05em;
   display: block;
@@ -695,6 +695,7 @@ img {
   color: #fff;
   font-family: 'Lobster', cursive;
   font-weight: 400;
+  -webkit-text-stroke: 0.4px #fff;
   text-transform: none;
   font-size: clamp(1.2rem, 5.5vw, 3rem);
   margin: 0;
@@ -1042,7 +1043,8 @@ img {
   color: #1c203a;
   font-family: 'Lobster', cursive;
   font-size: 2em;
-  font-weight: 700;
+  font-weight: 400;
+  -webkit-text-stroke: 0.5px #1c203a;
   margin-bottom: 0.5em;
 }
 
@@ -1257,6 +1259,7 @@ img {
   color: #fff;
   font-family: 'Lobster', cursive;
   font-size: 1.3em;
+  -webkit-text-stroke: 0.5px #fff;
   margin-bottom: 0.5em;
 }
 

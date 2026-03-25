@@ -727,3 +727,13 @@ document.addEventListener('DOMContentLoaded', function () {
   window.switchLanguage = setLanguage;
 
 }); // Ende DOMContentLoaded
+
+// Google Maps: erst nach Klick laden (DSGVO 2-Klick-Lösung)
+function loadGoogleMap() {
+  var wrapper = document.getElementById('map-consent-wrapper');
+  var iframe  = document.getElementById('google-map-iframe');
+  if (!iframe) return;
+  iframe.src = iframe.getAttribute('data-src');
+  iframe.style.display = 'block';
+  if (wrapper) wrapper.style.display = 'none';
+}

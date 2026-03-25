@@ -1065,6 +1065,47 @@ img {
   display: block;
 }
 
+/* Google Maps 2-Klick Consent-Box */
+.map-consent-wrapper {
+  width: 100%;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0ede8;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.map-consent-box {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.map-consent-text {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.map-consent-btn {
+  background: #1c203a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.4rem;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.map-consent-btn:hover {
+  background: #3a4068;
+}
+
 @media (min-width: 900px) {
   .details-content {
     flex-direction: row;

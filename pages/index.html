@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Diana & Julian – Hochzeit</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Parisienne&family=Lobster&family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/fonts.css">
   <link rel="stylesheet" href="../styles/main.css">
   <!-- Kein externes Captcha nötig -->
 </head>
@@ -105,11 +103,19 @@
         </div>
       </div>
       <div class="details-map">
+        <div class="map-consent-wrapper" id="map-consent-wrapper">
+          <div class="map-consent-box">
+            <p class="map-consent-text">🗺️ Diese Karte wird von Google Maps bereitgestellt.<br>Beim Laden werden Daten an Google übertragen.</p>
+            <button class="map-consent-btn" onclick="loadGoogleMap()">Karte anzeigen</button>
+          </div>
+        </div>
         <iframe
-          src="https://www.google.com/maps?q=Traben-Trarbach&output=embed"
+          id="google-map-iframe"
+          src=""
+          data-src="https://www.google.com/maps?q=Traben-Trarbach&output=embed"
           width="100%"
           height="260"
-          style="border:0; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.12); display:block;"
+          style="border:0; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.12); display:none;"
           allowfullscreen=""
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"

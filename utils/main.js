@@ -338,12 +338,14 @@ document.addEventListener('DOMContentLoaded', function () {
         formData.append('essen',          essenEl ? essenEl.value : '');
         formData.append('essen_sonstiges',(document.getElementById('essen-sonstiges') || {}).value || '');
         formData.append('website',        (document.getElementById('hp-website') || {}).value || '');
+        formData.append('_cc',            'Dianamartin1112@gmail.com');
         formData.append('form_time',      (document.getElementById('form-time') || {}).value || '');
 
         // --- An PHP senden ---
-        fetch('http://access-5020079354.webspace-host.com/formular.php', {
+        fetch('https://formspree.io/f/xeepoqay', {
           method: 'POST',
-          body: formData
+          body: formData,
+          headers: { 'Accept': 'application/json' }
         }).catch(function() {
           // Netzwerkfehler still ignorieren – Toast trotzdem zeigen
         });

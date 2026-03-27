@@ -2,17 +2,26 @@
 // ============================================================
 // HOCHZEIT DIANA & JULIAN – Formular-Backend
 // ============================================================
-// Dieses Script auf deinen Ionos-Webspace hochladen (per FTP)
-// Pfad im JS anpassen: fetch('../formular.php', ...)
+// PHPMailer via Gmail SMTP
 //
 // E-Mails gehen an:
-//   To:  rsvp@hoerst.org
-//   CC:  Dianamartin1112@gmail.com
+//   To:  julian.hoerst@gmail.com (Julian)
+//   CC:  Dianamartin1112@gmail.com (Diana)
 // ============================================================
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require __DIR__ . '/phpmailer/src/Exception.php';
+require __DIR__ . '/phpmailer/src/PHPMailer.php';
+require __DIR__ . '/phpmailer/src/SMTP.php';
+
 // --- Konfiguration ---
-define('MAIL_TO',         'rsvp@hoerst.org');
+define('MAIL_TO',         'julian.hoerst@gmail.com');
 define('MAIL_CC',         'Dianamartin1112@gmail.com');
+define('GMAIL_USER',      'sonjahoerst@gmail.com');
+define('GMAIL_PASS',      'pjegdxcpvryxchrs');
 define('CSV_FILE',        __DIR__ . '/anmeldungen.csv');
 define('ALLOWED_ORIGIN',  'https://hochzeit.hoerst.org');
 
@@ -115,18 +124,29 @@ $mailBody .= "Essenswunsch:      {$essenLabel}\n";
 $mailBody .= "\n" . str_repeat('-', 54) . "\n";
 $mailBody .= "Gesendet am: {$zeitstempel} Uhr\n";
 
-$headers  = "From: RSVP Hochzeit <noreply@hoerst.org>\r\n";
-$headers .= "Reply-To: {$vorname} {$nachname} <{$email}>\r\n";
-$headers .= "Cc: " . MAIL_CC . "\r\n";
-$headers .= "MIME-Version: 1.0\r\n";
-$headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-$headers .= "Content-Transfer-Encoding: 8bit\r\n";
+// --- E-Mail via PHPMailer + Gmail SMTP senden ---
+$mail = new PHPMailer(true);
+try {
+    $mail->isSMTP();
+    $mail->Host       = 'smtp.gmail.com';
+    $mail->SMTPAuth   = true;
+    $mail->Username   = GMAIL_USER;
+    $mail->Password   = GMAIL_PASS;
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port       = 587;
+    $mail->CharSet    = 'UTF-8';
 
-$sent = mail(MAIL_TO, $betreff, $mailBody, $headers);
+    $mail->setFrom(GMAIL_USER, 'RSVP Hochzeit');
+    $mail->addAddress(MAIL_TO);
+    $mail->addCC(MAIL_CC);
+    $mail->addReplyTo($email, "{$vorname} {$nachname}");
 
-if ($sent) {
+    $mail->Subject = "Hochzeit RSVP: {$vorname} {$nachname} – " . ($anwesenheit === 'zusage' ? 'Zusage' : 'Absage');
+    $mail->Body    = $mailBody;
+
+    $mail->send();
     echo json_encode(['success' => true]);
-} else {
+} catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['success' => false, 'error' => 'E-Mail konnte nicht gesendet werden.']);
+    echo json_encode(['success' => false, 'error' => $mail->ErrorInfo]);
 }

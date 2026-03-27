@@ -338,7 +338,7 @@ document.addEventListener('DOMContentLoaded', function () {
         formData.append('essen',          essenEl ? essenEl.value : '');
         formData.append('essen_sonstiges',(document.getElementById('essen-sonstiges') || {}).value || '');
         formData.append('website',        (document.getElementById('hp-website') || {}).value || '');
-        formData.append('_cc',            'Dianamartin1112@gmail.com');
+        formData.append('_cc',            'julian.hoerst@gmail.com');
         formData.append('form_time',      (document.getElementById('form-time') || {}).value || '');
 
         // --- An PHP senden ---

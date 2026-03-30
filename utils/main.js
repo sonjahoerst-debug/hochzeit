@@ -451,8 +451,8 @@ document.addEventListener('DOMContentLoaded', function () {
       if (detailsTitles[0]) detailsTitles[0].textContent = 'Wann';
       if (detailsTitles[1]) detailsTitles[1].textContent = 'Wo';
       const detailsTexts = document.querySelectorAll('.details-block-text');
-      if (detailsTexts[0]) detailsTexts[0].innerHTML = '<strong>Freitag, 29. Mai 2026</strong><br>Hochzeitszeremonie: 13:00 Uhr<br>Hochzeitsfeier: 19:00 Uhr';
-      if (detailsTexts[1]) detailsTexts[1].innerHTML = 'Friedrichspark<br>Lindenstraße 507<br>10555 Berlin';
+      if (detailsTexts[0]) detailsTexts[0].innerHTML = '<strong>Freitag, 29. Mai 2026</strong><br>Trauung: 13 Uhr<br>Hochzeitsfeier: 19:00 Uhr';
+      if (detailsTexts[1]) detailsTexts[1].innerHTML = 'Bürgersaal Traben-Trarbach<br>Am Markt 1<br>56841 Traben-Trarbach';
 
       // Anfahrt – Überschrift
       const anfahrtTitle = document.querySelector('#anfahrt .geschichte-title');
@@ -568,8 +568,8 @@ document.addEventListener('DOMContentLoaded', function () {
       if (detailsTitles[0]) detailsTitles[0].textContent = 'Cuándo';
       if (detailsTitles[1]) detailsTitles[1].textContent = 'Dónde';
       const detailsTexts = document.querySelectorAll('.details-block-text');
-      if (detailsTexts[0]) detailsTexts[0].innerHTML = '<strong>Viernes, 29 de mayo de 2026</strong><br>Ceremonia: 13:00<br>Fiesta: 19:00';
-      if (detailsTexts[1]) detailsTexts[1].innerHTML = 'Friedrichspark<br>Lindenstraße 507<br>10555 Berlín';
+      if (detailsTexts[0]) detailsTexts[0].innerHTML = '<strong>Viernes, 29 de mayo de 2026</strong><br>Ceremonia: 13h<br>Fiesta: 19:00';
+      if (detailsTexts[1]) detailsTexts[1].innerHTML = 'Bürgersaal Traben-Trarbach<br>Am Markt 1<br>56841 Traben-Trarbach';
 
       // Anfahrt – Überschrift
       const anfahrtTitle = document.querySelector('#anfahrt .geschichte-title');
@@ -619,6 +619,9 @@ document.addEventListener('DOMContentLoaded', function () {
       if (emailEl) emailEl.placeholder = 'Correo electrónico *';
       const telefonEl = document.querySelector('.zusagen-form input[type="tel"]');
       if (telefonEl) telefonEl.placeholder = 'Teléfono (opcional)';
+      // Unterkunft
+      const unterkunftEl = document.getElementById('unterkunft');
+      if (unterkunftEl) unterkunftEl.placeholder = '¿Ya tienes alojamiento? (opcional)';
       // Begleitung
       const begleitLabel = document.querySelector('.zusagen-begleitung-label');
       if (begleitLabel) begleitLabel.innerHTML = '¿Viajas con acompañante? <span class="pflicht-stern">*</span>';

@@ -16,6 +16,29 @@
   src: url('../assets/fonts/Lobster-Regular.woff2') format('woff2');
 }
 
+@font-face {
+  font-family: 'Lobster Two';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/Lato,Lobster,Lobster_Two,Montserrat,Parisienne/Lobster_Two/LobsterTwo-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Lobster Two';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/Lato,Lobster,Lobster_Two,Montserrat,Parisienne/Lobster_Two/LobsterTwo-Italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Lobster Two';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../assets/fonts/Lato,Lobster,Lobster_Two,Montserrat,Parisienne/Lobster_Two/LobsterTwo-Bold.ttf') format('truetype');
+}
 
 @font-face {
   font-family: 'Raleway';

@@ -723,8 +723,11 @@ img {
   display: inline-block;
   vertical-align: middle;
   flex: 1;
-  height: 0;
-  border-top: 2px dotted rgba(255, 255, 255, 0.6);
+  height: 2px;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.6) 1px, transparent 1px);
+  background-size: 6px 2px;
+  background-repeat: repeat-x;
+  background-position: center;
   margin: 0 0.5em;
   min-width: 12px;
 }
@@ -735,7 +738,7 @@ img {
 }
 
 .geschichte-dots-dark {
-  border-top-color: #1c203a !important;
+  background-image: radial-gradient(circle, rgba(28, 32, 58, 0.6) 1px, transparent 1px) !important;
 }
 
 .zusagen-headline-color {

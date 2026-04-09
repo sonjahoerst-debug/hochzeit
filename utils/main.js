@@ -424,7 +424,7 @@ document.addEventListener('DOMContentLoaded', function () {
       // Navigation
       document.querySelector('a[href="#geschichte"]').textContent = 'Unsere Geschichte';
       document.querySelector('a[href="#details"]').textContent = 'Details';
-      document.querySelector('a[href="#anfahrt"]').textContent = 'Anfahrt';
+      document.querySelector('a[href="#anfahrt"]').textContent = 'Programm';
       document.querySelector('a[href="#geschenke"]').textContent = 'Geschenke';
       document.querySelector('a[href="#zusagen"]').textContent = 'Zusagen';
 
@@ -451,21 +451,19 @@ document.addEventListener('DOMContentLoaded', function () {
       if (detailsTitles[0]) detailsTitles[0].textContent = 'Wann';
       if (detailsTitles[1]) detailsTitles[1].textContent = 'Wo';
       const detailsTexts = document.querySelectorAll('.details-block-text');
-      if (detailsTexts[0]) detailsTexts[0].innerHTML = '<strong>Freitag, 29. Mai 2026</strong><br>Trauung: 13 Uhr<br>Hochzeitsfeier: 19:00 Uhr';
-      if (detailsTexts[1]) detailsTexts[1].innerHTML = 'Bürgersaal Traben-Trarbach<br>Am Markt 1<br>56841 Traben-Trarbach';
+      if (detailsTexts[0]) detailsTexts[0].innerHTML = '<strong>Freitag, 29. Mai 2026</strong><br>Trauung: 13 Uhr<br>Hochzeitsfeier: 18:00 Uhr';
+      if (detailsTexts[1]) detailsTexts[1].innerHTML = 'Bürgersaal Traben-Trarbach<br>Bahnstraße 22<br>56841 Traben-Trarbach';
 
-      // Anfahrt – Überschrift
+      // Programm – Überschrift
       const anfahrtTitle = document.querySelector('#anfahrt .geschichte-title');
       if (anfahrtTitle) anfahrtTitle.textContent = 'INFOS';
       const anfahrtTitle2 = document.querySelector('#anfahrt .geschichte-title-2');
-      if (anfahrtTitle2) anfahrtTitle2.innerHTML = '<span class="geschichte-dots-inline geschichte-dots-dark"></span>zur Anfahrt<span class="geschichte-dots-inline geschichte-dots-dark"></span>';
-      // Anfahrt – Inhalt
+      if (anfahrtTitle2) anfahrtTitle2.innerHTML = '<span class="geschichte-dots-inline geschichte-dots-dark"></span>zum Programm<span class="geschichte-dots-inline geschichte-dots-dark"></span>';
+      // Programm – Inhalt
       const anfahrtTitles = document.querySelectorAll('.anfahrt-box-title');
-      if (anfahrtTitles[0]) anfahrtTitles[0].textContent = 'Transport';
-      if (anfahrtTitles[1]) anfahrtTitles[1].textContent = 'Unterbringung';
+      if (anfahrtTitles[0]) anfahrtTitles[0].textContent = 'Tagesablauf';
       const anfahrtTexts = document.querySelectorAll('.anfahrt-box-text');
-      if (anfahrtTexts[0]) anfahrtTexts[0].textContent = 'Ich bin ein Textabschnitt. Klicken Sie hier, um Ihren eigenen Text hinzuzufügen und mich zu bearbeiten. Hier können Sie Ihren Besuchern mehr erzählen.';
-      if (anfahrtTexts[1]) anfahrtTexts[1].textContent = 'Ich bin ein Textabschnitt. Klicken Sie hier, um Ihren eigenen Text hinzuzufügen und mich zu bearbeiten. Hier können Sie Ihren Besuchern mehr erzählen.';
+      if (anfahrtTexts[0]) anfahrtTexts[0].innerHTML = '<strong>13:00 Uhr – Standesamtliche Trauung im Familienkreis</strong>Weingut Langguth, Rissbacher Str. 31, 56841 Traben-Trarbach.<br>Alle anderen sind herzlich eingeladen, uns vor dem Trauzimmer zu empfangen.<br>Falls du nicht persönlich dabei sein kannst, freuen wir uns sehr über deine Online-Teilnahme.<br><strong>Zoom:</strong> <a href="https://tinyurl.com/jd20260529" target="_blank" style="color: #a7d6f7;">https://tinyurl.com/jd20260529</a><br><br><strong>13:45 Uhr – Sektempfang mit allen Gästen</strong>Bürgersaal Altes Rathaus, Bahnstraße 22, 56841 Traben-Trarbach.<br>Circa 500m vom Ort der Trauung.<br><br><strong>18:00 Uhr – Abendessen</strong>Bürgersaal Altes Rathaus, Bahnstraße 22, 56841 Traben-Trarbach';
 
       // Geschenke – Überschrift
       const geschenkeTitle = document.querySelector('#geschenke .geschichte-title');
@@ -492,7 +490,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const formHeader = document.querySelector('.zusagen-form-datum');
       if (formHeader) formHeader.innerHTML = '<svg viewBox="0 0 616.15 457.71" xmlns="http://www.w3.org/2000/svg" class="formular-flugzeug-svg" aria-hidden="true"><path d="M333.71,269.94s4.4-13.72,3.85-24.71c-.56-10.98-8.57-61.3-8.57-61.3l-7.73-41.49s-5.93-23.5-10.21-28.75c-4.27-5.25,9.78-7.89,16.81,2.82,7.03,10.71,41.93,114.26,41.93,114.26l8.54,5.16s5.09-5.01,16.8-6.53c11.71-1.53,18.88,9.59,18.74,16.54s-2.61,15.67-12.25,15.94-18.6-5.44-18.6-5.44l2.21,18.54,30.03,5.77s11.71.48,30.58,6.06c18.87,5.58,20.95,17.7,20.95,17.7,0,0,.42,16.59-30.3,17.48-30.72.89-52.35-2.14-52.35-2.14l-25.89,25.14s34.85-5.4,27.01,16.87c-7.84,22.27-22.18,5.38-26.45,3.47-4.27-1.91-12.68-6.67-12.68-6.67,0,0-77.24,79.99-87.57,88.93-10.33,8.94-13.5,9.61-13.5,9.61,0,0-10.06-.28-8.27-7.02s65.8-86.34,76.54-104.08c10.74-17.74,12.38-31.58,12.38-31.58l-51.8-4.52-34.99-3.03s-33.59,37.79-39.1,44.92c-5.51,7.13-11.02,3.56-11.02,3.56l31.1-61.82s-23.83-6.19-36.65-10.58c-12.81-4.4-23.15-13.51-23.15-13.51,0,0,8.68-5.79,25.62-1.9,16.95,3.9,37.75,7.15,37.75,7.15,0,0-3.75-55.09-3.34-64.56.41-9.47,6.75-4.8,9.37,2.25,2.62,7.06,14.35,56.99,17.94,60.88,3.58,3.89,86.23-3.43,86.23-3.43Z" fill="#a7d6f7"/></svg> Boarding 29.05.2026';
       const formFrist = document.querySelector('.zusagen-form-frist');
-      if (formFrist) formFrist.innerHTML = 'Bitte checke bis zum <strong>15.04.2026</strong> ein.';
+      if (formFrist) formFrist.innerHTML = 'Bitte checke bis zum <strong>15.05.2026</strong> ein.';
       // Persönliche Daten
       const vornameEl = document.getElementById('vorname');
       if (vornameEl) vornameEl.placeholder = 'Vorname *';
@@ -540,7 +538,7 @@ document.addEventListener('DOMContentLoaded', function () {
       // Navigation
       document.querySelector('a[href="#geschichte"]').textContent = 'Nuestra Historia';
       document.querySelector('a[href="#details"]').textContent = 'Detalles';
-      document.querySelector('a[href="#anfahrt"]').textContent = 'Cómo llegar';
+      document.querySelector('a[href="#anfahrt"]').textContent = 'Programa';
       document.querySelector('a[href="#geschenke"]').textContent = 'Regalos';
       document.querySelector('a[href="#zusagen"]').textContent = 'Confirmar';
 
@@ -568,21 +566,19 @@ document.addEventListener('DOMContentLoaded', function () {
       if (detailsTitles[0]) detailsTitles[0].textContent = 'Cuándo';
       if (detailsTitles[1]) detailsTitles[1].textContent = 'Dónde';
       const detailsTexts = document.querySelectorAll('.details-block-text');
-      if (detailsTexts[0]) detailsTexts[0].innerHTML = '<strong>Viernes, 29 de mayo de 2026</strong><br>Ceremonia: 13h<br>Fiesta: 19:00';
-      if (detailsTexts[1]) detailsTexts[1].innerHTML = 'Bürgersaal Traben-Trarbach<br>Am Markt 1<br>56841 Traben-Trarbach';
+      if (detailsTexts[0]) detailsTexts[0].innerHTML = '<strong>Viernes, 29 de mayo de 2026</strong><br>Ceremonia: 13h<br>Fiesta: 18:00';
+      if (detailsTexts[1]) detailsTexts[1].innerHTML = 'Bürgersaal Traben-Trarbach<br>Bahnstraße 22<br>56841 Traben-Trarbach';
 
-      // Anfahrt – Überschrift
+      // Programa – Überschrift
       const anfahrtTitle = document.querySelector('#anfahrt .geschichte-title');
-      if (anfahrtTitle) anfahrtTitle.textContent = 'CÓMO';
+      if (anfahrtTitle) anfahrtTitle.textContent = 'INFOS';
       const anfahrtTitle2 = document.querySelector('#anfahrt .geschichte-title-2');
-      if (anfahrtTitle2) anfahrtTitle2.innerHTML = '<span class="geschichte-dots-inline geschichte-dots-dark"></span>llegar<span class="geschichte-dots-inline geschichte-dots-dark"></span>';
-      // Anfahrt – Inhalt
+      if (anfahrtTitle2) anfahrtTitle2.innerHTML = '<span class="geschichte-dots-inline geschichte-dots-dark"></span>del programa<span class="geschichte-dots-inline geschichte-dots-dark"></span>';
+      // Programa – Inhalt
       const anfahrtTitles = document.querySelectorAll('.anfahrt-box-title');
-      if (anfahrtTitles[0]) anfahrtTitles[0].textContent = 'Transporte';
-      if (anfahrtTitles[1]) anfahrtTitles[1].textContent = 'Alojamiento';
+      if (anfahrtTitles[0]) anfahrtTitles[0].textContent = 'Programa del día';
       const anfahrtTexts = document.querySelectorAll('.anfahrt-box-text');
-      if (anfahrtTexts[0]) anfahrtTexts[0].textContent = 'Este es un texto de ejemplo. Haz clic aquí para añadir tu propio texto. Aquí puedes contar más a tus invitados.';
-      if (anfahrtTexts[1]) anfahrtTexts[1].textContent = 'Este es un texto de ejemplo. Haz clic aquí para añadir tu propio texto. Aquí puedes contar más a tus invitados.';
+      if (anfahrtTexts[0]) anfahrtTexts[0].innerHTML = '<strong>13:00 H – Ceremonia civil con familiares más allegados</strong>Weingut Langguth, Rissbacher Str. 31, 56841 Traben-Trarbach.<br>Los demás están cordialmente invitados a recibirnos en la entrada del salón de la ceremonia.<br>Si no puedes acompañarnos personalmente, estaremos encantados de que participes de forma online.<br><strong>Zoom:</strong> <a href="https://tinyurl.com/jd20260529" target="_blank" style="color: #a7d6f7;">https://tinyurl.com/jd20260529</a><br><br><strong>13:45 H – Brindis con todos los invitados</strong>Bürgersaal Altes Rathaus, Bahnstraße 22, 56841 Traben-Trarbach.<br>Aproximadamente a 500 metros del lugar de la ceremonia.<br><br><strong>18:00 H – Cena</strong>Bürgersaal Altes Rathaus, Bahnstraße 22, 56841 Traben-Trarbach';
 
       // Geschenke – Überschrift
       const geschenkeTitle = document.querySelector('#geschenke .geschichte-title');
@@ -609,7 +605,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const formHeader = document.querySelector('.zusagen-form-datum');
       if (formHeader) formHeader.innerHTML = '<svg viewBox="0 0 616.15 457.71" xmlns="http://www.w3.org/2000/svg" class="formular-flugzeug-svg" aria-hidden="true"><path d="M333.71,269.94s4.4-13.72,3.85-24.71c-.56-10.98-8.57-61.3-8.57-61.3l-7.73-41.49s-5.93-23.5-10.21-28.75c-4.27-5.25,9.78-7.89,16.81,2.82,7.03,10.71,41.93,114.26,41.93,114.26l8.54,5.16s5.09-5.01,16.8-6.53c11.71-1.53,18.88,9.59,18.74,16.54s-2.61,15.67-12.25,15.94-18.6-5.44-18.6-5.44l2.21,18.54,30.03,5.77s11.71.48,30.58,6.06c18.87,5.58,20.95,17.7,20.95,17.7,0,0,.42,16.59-30.3,17.48-30.72.89-52.35-2.14-52.35-2.14l-25.89,25.14s34.85-5.4,27.01,16.87c-7.84,22.27-22.18,5.38-26.45,3.47-4.27-1.91-12.68-6.67-12.68-6.67,0,0-77.24,79.99-87.57,88.93-10.33,8.94-13.5,9.61-13.5,9.61,0,0-10.06-.28-8.27-7.02s65.8-86.34,76.54-104.08c10.74-17.74,12.38-31.58,12.38-31.58l-51.8-4.52-34.99-3.03s-33.59,37.79-39.1,44.92c-5.51,7.13-11.02,3.56-11.02,3.56l31.1-61.82s-23.83-6.19-36.65-10.58c-12.81-4.4-23.15-13.51-23.15-13.51,0,0,8.68-5.79,25.62-1.9,16.95,3.9,37.75,7.15,37.75,7.15,0,0-3.75-55.09-3.34-64.56.41-9.47,6.75-4.8,9.37,2.25,2.62,7.06,14.35,56.99,17.94,60.88,3.58,3.89,86.23-3.43,86.23-3.43Z" fill="#a7d6f7"/></svg> Embarque 29.05.2026';
       const formFrist = document.querySelector('.zusagen-form-frist');
-      if (formFrist) formFrist.innerHTML = 'Por favor confirma antes del <strong>15.04.2026</strong>.';
+      if (formFrist) formFrist.innerHTML = 'Por favor confirma antes del <strong>15.05.2026</strong>.';
       // Persönliche Daten
       const vornameEl = document.getElementById('vorname');
       if (vornameEl) vornameEl.placeholder = 'Nombre *';
